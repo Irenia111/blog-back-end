@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-public class ControlExceptionHandler {
+public class ControllerExceptionHandler {
     // 获得日志
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
