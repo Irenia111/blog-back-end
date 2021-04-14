@@ -1,9 +1,8 @@
 package com.irenia.blog.prototype;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "t_type")
@@ -13,7 +12,18 @@ public class Type {
     private Long id;
     private String name;
 
+    @OneToMany(mappedBy = "type")//根据blog中的type维护关系
+    private List<Blog> blogs = new ArrayList<>();
+
     public Type() {
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     public String getName() {

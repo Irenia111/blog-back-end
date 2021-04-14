@@ -1,7 +1,9 @@
 package com.irenia.blog.prototype;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_blog")// 根据类，直接生成sql表
@@ -21,11 +23,23 @@ public class Blog {
     private boolean published;
     private boolean recommend;
 
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;//规定日期的存储方式为timestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+
+    @ManyToOne
+    private Type type;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})//级联新增，新增blog时创建新的tag
+    private List<Tag> tags = new ArrayList<>();
+
+
+    @ManyToOne
+    private User user;
+
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> comments = new ArrayList<>();
 
     public Blog() {
     }
@@ -132,6 +146,38 @@ public class Blog {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
