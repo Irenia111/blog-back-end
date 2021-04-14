@@ -1,9 +1,14 @@
 package com.irenia.blog.prototype;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "t_blog")// 根据类，直接生成sql表
 public class Blog {
-    private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;//id为主键，自增长
 
     private String title;
     private String content;
@@ -15,7 +20,11 @@ public class Blog {
     private boolean commentable;
     private boolean published;
     private boolean recommend;
-    private Date createTime;
+
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;//规定日期的存储方式为timestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
     public Blog() {

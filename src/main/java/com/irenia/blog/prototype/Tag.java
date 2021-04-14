@@ -1,6 +1,15 @@
 package com.irenia.blog.prototype;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "t_tag")
 public class Tag {
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
 

@@ -1,8 +1,13 @@
 package com.irenia.blog.prototype;
 
+import javax.persistence.*;
 import java.util.Date;
-// 用户原型类
+
+@Entity
+@Table(name = "t_user")
 public class User {
+    @Id
+    @GeneratedValue
     private Long id;
     private String nickname;
     private String username;
@@ -10,7 +15,9 @@ public class User {
     private String email;
     private String avatar;
     private Integer type;// 用户类型：管理员&普通用户
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
     public User() {
