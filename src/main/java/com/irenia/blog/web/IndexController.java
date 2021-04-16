@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{id}/{path}")
-    public String index(@PathVariable Integer id, @PathVariable String path) {
+    @GetMapping("/")
+    public String index() {
         // throw new NotFoundException("页面未找到");
         System.out.println("------index------");
         return "index";

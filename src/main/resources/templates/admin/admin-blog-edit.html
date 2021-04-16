@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog-edit</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../../static/css/index.css">
+    <link rel="stylesheet" type="text/css" th:href="@{lib/editor-md/css/editormd.css}" href="../../static/lib/editor-md/css/editormd.css">
+</head>
+<body>
+<!-- 导航 -->
+<nav class="ui sticky inverted attached segment m-padded-td-mini m-shadow-small" style="border-color: transparent">
+    <div class="ui container m-shadow-small">
+        <div class="ui inverted secondary stackable menu m-shadow-small">
+            <h2 class="ui teal header item">Admin</h2>
+            <a class="ui item m-mobile-hide nav-item"><i class="book icon"></i>博客</a>
+            <a class="ui item m-mobile-hide nav-item"><i class="folder open icon"></i>分类</a>
+            <a class="ui item m-mobile-hide nav-item"><i class="tags icon"></i>标签</a>
+            <div class="right item m-mobile-hide nav-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="https://avatars.dicebear.com/api/gridy/Irenia.svg?colorful=2">
+                        珍妮赫斯
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black icon button m-top-right m-mobile-show menu-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!-- 内容 -->
+<main class="m-padded-td-big">
+    <div class="m-container-small">
+        <div class="ui container">
+            <div class="ui pointing menu teal">
+                <a href="#" class="active item">发布</a>
+                <a href="#" class="item">列表</a>
+            </div>
+            <div class="ui segment">
+                <form action="#" method="post" class="ui form">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <div class="ui section dropdown teal basic label">
+                                <input type="hidden" value="原创">
+                                <div class="text">原创</div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <div class="item" data-value="原创">原创</div>
+                                    <div class="item" data-value="转载">转载</div>
+                                    <div class="item" data-value="翻译">翻译</div>
+                                </div>
+                            </div>
+                            <input type="text" name="title" placeholder="标题">
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui teal basic label"><i class="image icon"></i>首图地址</label>
+                            <input type="text" placeholder="url... ...">
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div id="content-editormd" style="z-index: 10 !important;">
+                            <textarea name="content" style="display:none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="required field">
+                            <div class="ui action labeled input">
+                                <div class="ui label teal basic">分类</div>
+                                <div class="ui dropdown fluid selection">
+                                    <input type="hidden" value="读书笔记" name="type">
+                                    <div class="default text">读书笔记</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">读书笔记</div>
+                                        <div class="item" data-value="2">开发者手册</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui action labeled input">
+                                <div class="ui label teal basic">标签</div>
+                                <div class="ui dropdown fluid multiple search selection">
+                                    <input type="hidden" name="tag">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div class="item" data-value="1">java</div>
+                                        <div class="item" data-value="2">js</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="field">
+                            <div class="ui slider checkbox">
+                                <input type="checkbox" id="recommend" name="recommend" class="hidden">
+                                <label for="recommend">推荐</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui slider checkbox">
+                                <input type="checkbox" id="copyright-info" name="copyright-info" class="hidden">
+                                <label for="copyright-info">转载声明</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui slider checkbox">
+                                <input type="checkbox" id="great" name="great" class="hidden">
+                                <label for="great">赞赏</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui slider checkbox">
+                                <input type="checkbox" id="comment" name="comment" class="hidden">
+                                <label for="comment">留言</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui error message"></div>
+                    <div class="ui container right aligned"  style="margin-top: 2em">
+                        <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                        <button class="ui secondary button">保存</button>
+                        <button class="ui teal button">发布</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+<!--页脚-->
+<footer class="ui inverted vertical footer segment m-padded-td-max">
+    <div class="ui center aligned container">
+        <p class="m-text-lined m-text-spaced m-text-thin m-opacity-tiny">© 2021 Irenia</p>
+    </div>
+</footer>
+<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{lib/editor-md/editormd.js}" src="../../static/lib/editor-md/editormd.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script type="text/javascript" th:src="@{js/admin.js}" src="../../static/js/admin.js"></script>
+<script type="text/javascript" th:src="@{js/markdown.js}" src="../../static/js/markdown.js"></script>
+</body>
+</html>

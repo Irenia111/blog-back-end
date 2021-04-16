@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:replace="${title}">Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">
+</head>
+<!--导航-->
+<div th:fragment="slider(n)" class="ui sidebar inverted vertical menu uncover animating">
+    <div class="item">
+        <div class="ui inverted transparent input">
+            <input type="text" placeholder="搜索"/>
+            <i class="search link icon"></i>
+        </div>
+    </div>
+    <a class="ui item" th:classappend="${n == 1} ? 'm-pink'">首页<i class="book icon" ></i></a>
+    <a class="ui item" th:classappend="${n == 2} ? 'm-pink'">分类<i class="folder open icon" ></i></a>
+    <a class="ui item" th:classappend="${n == 3} ? 'm-pink'">标签<i class="tags icon"></i></a>
+    <a class="ui item" th:classappend="${n == 4} ? 'm-pink'">归档<i class="archive icon"></i></a>
+    <a class="ui item" th:classappend="${n == 5} ? 'm-pink'">关于我<i class="sign language icon"></i></a>
+</div>
+<nav th:fragment="menu(n)" class="ui fixed inverted borderless menu">
+    <a id="toc" class="icon item m-mobile-show">
+        <i class="content icon"></i>
+    </a>
+    <div class="ui right item m-mobile-show m-pink">Irenia</div>
+    <h2 class="ui pink header item m-mobile-hide">Irenia</h2>
+    <a class="ui item m-mobile-hide" th:classappend="${n == 1} ? 'm-pink'">
+        <i class="book icon"></i>首页
+    </a>
+    <a class="ui item m-mobile-hide" th:classappend="${n == 2} ? 'm-pink'">
+        <i class="folder open icon"></i>分类
+    </a>
+    <a class="ui item m-mobile-hide" th:classappend="${n == 3} ? 'm-pink'">
+        <i class="tags icon"></i>标签
+    </a>
+    <a class="ui item m-mobile-hide" th:classappend="${n == 4} ? 'm-pink'">
+        <i class="archive icon"></i>归档
+    </a>
+    <a class="ui item m-mobile-hide" th:classappend="${n == 5} ? 'm-pink'">
+        关于我<i class="sign language icon"></i>
+    </a>
+    <div class="right item m-mobile-hide">
+        <div class="ui inverted transparent icon input">
+            <input type="text" placeholder="... ... ..."/>
+            <i class="search link icon"></i>
+        </div>
+    </div>
+</nav>
+
+<!--页脚-->
+<footer th:fragment="footer_mobile" class="ui inverted vertical footer segment m-padded-td-max m-mobile-show">
+    <div class="ui center aligned container">
+        <p class="m-text-lined m-text-spaced m-text-thin m-opacity-tiny">© 2021 Irenia</p>
+    </div>
+</footer>
+<footer th:fragment="footer_pc" class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <h4 class="ui inverted transparent header m-text-lined m-text-spaced m-opacity-min">最新博客</h4>
+                <div class="ui inverted link list m-text-lined m-text-spaced m-text-thin m-opacity-min">
+                    <a href="#" class="item">dddd</a>
+                    <a href="#" class="item">dddd</a>
+                    <a href="#" class="item">dddd</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header m-text-lined m-text-spaced m-opacity-min">联系我</h4>
+                <div class="ui inverted link list">
+                    <p class=" item m-text-lined m-text-spaced m-text-thin">E-mail: 15000616693@163.com</p>
+                    <p class="item m-text-lined m-text-spaced m-text-thin">QQ: 1042515407</p>
+                    <p class="item m-text-lined m-text-spaced m-text-thin">WeChat: syy_mushroom</p>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-lined m-text-spaced m-opacity-min">Irenia</h4>
+                <p class="m-text-lined m-text-spaced m-text-thin m-opacity-min">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tempora!
+                </p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-lined m-text-spaced m-text-thin m-opacity-tiny">© 2021 Irenia</p>
+    </div>
+</footer>
+</html>

@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
 </head>
 <body>
-404 not found
+<!-- 导航 -->
+<div th:replace="_fragments :: slider(0)" class="ui tiny thin sidebar inverted vertical menu uncover animating"></div>
+<nav th:replace="_fragments :: menu(0)" class="ui fixed inverted borderless menu"></nav>
+<!-- 内容 -->
+<main class="pusher">
+    <div class="main-container" style="min-height: 70vh">
+        <div class="m-padded-td-big m-container m-mobile-padded-td-big">
+            <div class="ui text container">
+                <div class="ui header">404 not found</div>
+            </div>
+        </div>
+    </div>
+    <!--页脚-->
+    <footer th:replace="_fragments :: footer_mobile" class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
+    <footer th:replace="_fragments :: footer_pc" class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
+</main>
+<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js" ></script>
 </body>
 </html>

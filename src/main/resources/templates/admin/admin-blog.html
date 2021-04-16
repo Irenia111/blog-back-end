@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog-admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../../static/css/index.css">
+</head>
+<body>
+<!-- 导航 -->
+<nav class="ui sticky inverted attached segment m-padded-td-mini m-shadow-small" style="border-color: transparent">
+    <div class="ui container m-shadow-small">
+        <div class="ui inverted secondary stackable menu m-shadow-small">
+            <h2 class="ui teal header item">Admin</h2>
+            <a class="ui item m-mobile-hide nav-item"><i class="book icon"></i>博客</a>
+            <a class="ui item m-mobile-hide nav-item"><i class="folder open icon"></i>分类</a>
+            <a class="ui item m-mobile-hide nav-item"><i class="tags icon"></i>标签</a>
+            <div class="right item m-mobile-hide nav-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="https://joeschmoe.io/api/v1/tom">
+                        珍妮赫斯
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black icon button m-top-right m-mobile-show menu-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!-- 内容 -->
+
+<main class="m-padded-td-big">
+    <div class="m-container-small">
+        <div class="ui container">
+            <div class="ui pointing menu teal">
+                <a href="#" class="item">发布</a>
+                <a href="#" class="active item">列表</a>
+            </div>
+            <div class="ui segment center aligned">
+                <form action="#" method="post" class="ui form">
+                    <div class="inline fields">
+                        <div class="five wide field">
+                            <input type="text" name="title" placeholder="标题">
+                        </div>
+                        <div class="five wide field">
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="type">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">分类</div>
+                                <div class="menu">
+                                    <div class="item" data-value="1">错误日志</div>
+                                    <div class="item" data-value="2">开发者手册</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="three wide field">
+                            <div class="ui slider checkbox">
+                                <input type="checkbox" name="recommend" id="recommend">
+                                <label for="recommend">推荐</label>
+                            </div>
+                        </div>
+                        <div class="three wide field">
+                            <div class="ui button teal basic" style="width: 100%">
+                                <i class="icon search"></i>搜索
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <table class="ui single line fixed table rounded">
+                <thead>
+                <tr class="center aligned">
+                    <th>序号</th>
+                    <th>标题</th>
+                    <th>类型</th>
+                    <th>推荐</th>
+                    <th>更新时间</th>
+                    <th colspan="2">操作</th>
+                </tr>
+                </thead>
+                <tbody class="center aligned">
+                <tr>
+                    <td>1</td>
+                    <td>ssss</td>
+                    <td>类型</td>
+                    <td>是</td>
+                    <td>2021-04-02</td>
+                    <td class="right aligned">
+                        <a href="#" class="ui button mini green basic">编辑</a>
+                    </td>
+                    <td class="left aligned">
+                        <a href="#" class="ui button mini orange basic">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui small pagination menu ">
+                            <a class="item">上一页</a>
+                            <a class="item">下一页</a>
+                        </div>
+                        <a href="#" class="ui button teal right floated basic">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    </div>
+</main>
+<!--页脚-->
+<footer class="ui inverted vertical footer segment m-padded-td-max">
+    <div class="ui center aligned container">
+        <p class="m-text-lined m-text-spaced m-text-thin m-opacity-tiny">© 2021 Irenia</p>
+    </div>
+</footer>
+<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="../../static/js/admin.js"></script>
+</body>
+</html>

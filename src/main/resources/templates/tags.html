@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+<!-- 导航 -->
+<div th:replace="_fragments :: slider(3)" class="ui tiny thin sidebar inverted vertical menu uncover animating"></div>
+<nav th:replace="_fragments :: menu(3)" class="ui fixed inverted borderless menu"></nav>
+<!-- 内容 -->
+<main class="pusher">
+    <div class="main-container">
+        <div class="m-padded-td-big m-container m-mobile-padded-td-big">
+            <div class="ui container">
+                <div class="ui stackable grid">
+                    <div class="five wide column center aligned">
+                        <!----- 标签 ----->
+                        <div class="ui segment">
+                            <a target="_blank" class="ui tag label pink basic left pointing large m-margin-td">
+                                前端
+                                <div class="detail">13</div>
+                            </a>
+                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
+                                网sss络
+                                <div class="detail">23</div>
+                            </a>
+                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
+                                网络
+                                <div class="detail">23</div>
+                            </a>
+                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
+                                学习笔记
+                                <div class="detail">23</div>
+                            </a>
+                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
+                                学习笔记
+                                <div class="detail">23</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="eleven wide column">
+                        <!----- header ----->
+                        <div class="ui top attached segment">
+                            <div class="ui middle aligned two column grid">
+                                <div class="column">
+                                    <h3 class="ui pink header">博客</h3>
+                                </div>
+                                <div class="column right aligned">
+                                    共 <h3 class="ui orange header m-inline-block m-text-thin">14</h3> 篇
+                                </div>
+                            </div>
+                        </div>
+                        <!----- content ----->
+                        <div class="ui segment attached">
+                            <div class="ui padded vertical segment m-padded-td-large  m-padded-rl">
+                                <div class="ui stackable mobile reversed middle aligned stackable grid">
+                                    <div class="eleven wide column">
+                                        <h3 class="ui header">文章标题</h3>
+                                        <p class="m-opacity-min m-text-thin">内容 Lorem ipsum dolor sit amet, consectetur
+                                            adipisicing
+                                            elit. A
+                                            dicta doloremque eaque incidunt iste itaque laborum magni nulla veniam
+                                            vero.</p>
+                                        <div class="ui middle aligned grid">
+                                            <div class="eleven wide column">
+                                                <div class="ui horizontal link list">
+                                                    <div class="item">
+                                                        <img src="https://picsum.photos/id/0/100/100" alt=""
+                                                             class="ui avatar image">
+                                                        <div class="content"><span>Irenia</span></div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <span class="content"><i
+                                                                class="calendar icon"></i>2021-03-21</span>
+                                                    </div>
+                                                    <div class="item">
+                                                        <span class="content"><i class="eye icon"></i>2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="four wide column right aligned">
+                                                <a href="#" target="_blank" class="ui mini basic label pink">前端</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="five wide column">
+                                        <a href="" target="_blank">
+                                            <img src="https://picsum.photos/id/103/800/450"
+                                                 alt="" class="ui rounded image">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui padded vertical segment m-padded-td-large  m-padded-rl">
+                                <div class="ui stackable mobile reversed middle aligned grid">
+                                    <div class="eleven wide column">
+                                        <h3 class="ui header">文章标题</h3>
+                                        <p class="m-opacity-min m-text-thin">内容 Lorem ipsum dolor sit amet, consectetur
+                                            adipisicing
+                                            elit. A
+                                            dicta doloremque eaque incidunt iste itaque laborum magni nulla veniam
+                                            vero.</p>
+                                        <div class="ui middle aligned grid">
+                                            <div class="eleven wide column">
+                                                <div class="ui horizontal link list">
+                                                    <div class="item">
+                                                        <img src="https://picsum.photos/id/0/100/100" alt=""
+                                                             class="ui avatar image">
+                                                        <div class="content"><span>Irenia</span></div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <span class="content"><i
+                                                                class="calendar icon"></i>2021-03-21</span>
+                                                    </div>
+                                                    <div class="item">
+                                                        <span class="content"><i class="eye icon"></i>2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="four wide column right aligned">
+                                                <a href="#" target="_blank" class="ui mini basic label pink">前端</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="five wide column">
+                                        <a href="" target="_blank">
+                                            <img src="https://picsum.photos/id/109/800/450"
+                                                 alt="" class="ui rounded image">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----- bottom ----->
+                        <div class="ui bottom segment attached">
+                            <div class="ui middle aligned two column grid">
+                                <div class="column">
+                                    <a class="ui mini pink basic button">上一页</a>
+                                </div>
+                                <div class="column right aligned">
+                                    <a class="ui mini pink basic button">下一页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页脚-->
+    <footer th:replace="_fragments :: footer_mobile" class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
+    <footer th:replace="_fragments :: footer_pc" class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
+</main>
+<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js" ></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+
+body {
+    width: 100vw;
+    overflow: auto;
+    background: #1B1C1D;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    background: url("../images/memphis-mini.png");
+    padding-top: 5em;
+}
+
+/*---------- container -----------*/
+.m-container {
+    max-width: 74em !important;
+    margin: auto !important;
+}
+
+.m-container-small {
+    max-width: 60em !important;
+    margin: auto !important;
+}
+
+/*---------- position -----------*/
+.m-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/*---------- display -----------*/
+.m-inline-block {
+    display: inline-block !important;
+}
+
+/*---------- margin -----------*/
+.m-margin-td {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+.m-margin-td-big {
+    margin-top: 3em !important;
+    margin-bottom: 3em !important;
+}
+
+.m-margin-td-max {
+    margin-top: 5em !important;
+    margin-bottom: 5em !important;
+}
+
+/*---------- padding -----------*/
+.m-padded-td-mini {
+    padding: 0.2em 0 !important;
+}
+
+.m-padded-td-large {
+    padding: 2em 0 !important;
+}
+
+.m-padded-td-big {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+
+.m-padded-td-max {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+
+.m-padded-td {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+.m-padded-rl {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+.m-padded-rl-response {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+/*---------- text -----------*/
+.m-text-thin {
+    font-weight: 300 !important;
+}
+
+.m-text-spaced {
+    letter-spacing: 1px !important;
+}
+
+.m-text-lined {
+    line-height: 1.8;
+}
+
+/*---------- color -----------*/
+.m-black {
+    color: #1B1C1D !important;
+}
+
+.m-pink {
+    color: #FF1493 !important;
+}
+/*---------- opacity -----------*/
+
+.m-opacity-min {
+    opacity: 0.8 !important;
+}
+
+.m-opacity-tiny {
+    opacity: 0.6 !important;
+}
+
+/*---------- shadow -----------*/
+.m-shadow-small {
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+/*---------- sticky -----------*/
+.ui.sticky.fixed.top.mobile {
+    top: 3.8em !important;
+    bottom: auto;
+}
+.ui.sticky.fixed.top {
+    top: 7.2em !important;
+    bottom: auto;
+}
+/*---------- -----------*/
+.m-mobile-show {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .m-mobile-hide {
+        display: none !important;
+    }
+    .m-mobile-show {
+        display: block !important;
+    }
+    .m-mobile-padded-td-big{
+        padding-top: 0em !important;
+        padding-bottom: 3em !important;
+    }
+    .m-mobile-padded-td-max{
+        padding-top: 0em !important;
+        padding-bottom: 4em !important;
+    }
+
+    .m-padded-rl-response {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .m-container {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
+
