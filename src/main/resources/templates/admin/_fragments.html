@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:replace="${title}">Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">
+</head>
+<!--导航-->
+<nav th:fragment="menu(n)" class="ui sticky inverted attached segment m-padded-td-mini m-shadow-small" style="border-color: transparent">
+    <div class="ui container m-shadow-small">
+        <div class="ui inverted secondary stackable menu m-shadow-small">
+            <h2 class="ui teal header item">Admin</h2>
+            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 1} ? 'm-pink'"><i class="book icon"></i>博客管理</a>
+            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 2} ? 'm-pink'"><i class="folder open icon"></i>博客编辑</a>
+            <div class="right item m-mobile-hide nav-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="https://joeschmoe.io/api/v1/tom">
+                        珍妮赫斯
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black icon button m-top-right m-mobile-show menu-toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--页脚-->
+<footer th:fragment="footer" class="ui inverted vertical footer segment m-padded-td-max">
+    <div class="ui center aligned container">
+        <p class="m-text-lined m-text-spaced m-text-thin m-opacity-tiny">© 2021 Irenia</p>
+    </div>
+</footer>
+</html>
