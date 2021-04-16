@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="admin/_fragments :: head(~{::title})">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>blog-admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../../static/css/index.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" href="../../static/css/index.css">
 </head>
 <body>
 <!-- 导航 -->
@@ -93,8 +93,8 @@
 </main>
 <!--页脚-->
 <footer th:replace="admin/_fragments :: footer"></footer>
-<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-<script src="../../static/js/admin.js"></script>
+<script type="text/javascript" th:src="@{/js/admin.js}"src="../../static/js/admin.js"></script>
 </body>
 </html>

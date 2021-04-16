@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title)">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title th:replace="${title}">Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">
-</head>
 <!--导航-->
 <nav th:fragment="menu(n)" class="ui sticky inverted attached segment m-padded-td-mini m-shadow-small" style="border-color: transparent">
     <div class="ui container m-shadow-small">
