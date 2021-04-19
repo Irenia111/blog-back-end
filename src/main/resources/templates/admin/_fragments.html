@@ -5,11 +5,10 @@
     <div class="ui container m-shadow-small">
         <div class="ui inverted secondary stackable menu m-shadow-small">
             <h2 class="ui teal header item">Admin</h2>
-            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 1} ? 'active'"><i class="book icon"></i>博客管理</a>
-            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 2} ? 'active'"><i class="edit open icon"></i>博客编辑</a>
-            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 2} ? 'active'"><i class="folder open icon"></i>分类编辑</a>
-            <a class="ui item m-mobile-hide nav-item" th:classappend="${n == 2} ? 'active'"><i class="tags open icon"></i>标签编辑</a>
-
+            <a th:href="@{/admin/blogs}" class="ui item m-mobile-hide nav-item" th:classappend="${n == 1} ? 'active'"><i class="book icon"></i>博客管理</a>
+            <a th:href="@{/admin/blogs/edit}" class="ui item m-mobile-hide nav-item" th:classappend="${n == 2} ? 'active'"><i class="edit open icon"></i>博客编辑</a>
+            <a th:href="@{/admin/types}" class="ui item m-mobile-hide nav-item" th:classappend="${n == 3} ? 'active'"><i class="folder open icon"></i>分类编辑</a>
+            <a th:href="@{/admin/tags}" class="ui item m-mobile-hide nav-item" th:classappend="${n == 4} ? 'active'"><i class="tags open icon"></i>标签编辑</a>
             <div class="right item m-mobile-hide nav-item">
                 <div class="ui dropdown item">
                     <div class="text">

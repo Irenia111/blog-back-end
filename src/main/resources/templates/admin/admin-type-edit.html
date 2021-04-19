@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog-edit</title>
+    <title>type-edit</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" href="../../static/css/index.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/editor-md/css/editormd.css}"
-          href="../../static/lib/editor-md/css/editormd.css">
 </head>
 <body>
 <!-- 导航 -->
@@ -18,21 +16,21 @@
         <div class="m-container-small">
             <div class="ui container">
                 <div class="ui pointing menu teal">
-                    <a href="#" class="item">列表</a>
-                    <a href="#" class="active item">新增</a>
+                    <a th:href="@{/admin/types}" href="#" class="item">列表</a>
+                    <a href="#" class="active item">编辑</a>
                 </div>
                 <div class="ui segment">
-                    <form action="#" method="post" class="ui form">
+                    <form action="#" method="post" th:object="${type}" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/{id}(id=*{id})} " class="ui form">
                         <div class="required field">
                             <div class="ui left labeled input">
-                                <label class="ui teal basic label"></i>分类名称</label>
-                                <input type="text" placeholder="... ...">
+                                <label class="ui teal basic label">分类名称</label>
+                                <input type="text" name="name" th:value="*{name}" placeholder="......">
                             </div>
                         </div>
                         <div class="ui error message"></div>
                         <div class="ui container right aligned" style="margin-top: 2em">
                             <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                            <button class="ui teal button">提交</button>
+                            <button class="ui teal submit button">提交</button>
                         </div>
                     </form>
                 </div>
@@ -44,6 +42,20 @@
 <footer th:replace="admin/_fragments :: footer"></footer>
 <script type="text/javascript" th:src="@{/lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-<script type="text/javascript" th:src="@{/js/admin.js}" src="../../static/js/admin.js"></script>
+<script type="text/javascript" th:src="@{/js/admin.js}" src="../static/js/admin.js"></script>
+<script>
+    $('.ui.form').form({
+        fields : {
+            title : {
+                identifier: 'name',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入分类名称'
+                }]
+            }
+        }
+    });
+
+</script>
 </body>
 </html>
