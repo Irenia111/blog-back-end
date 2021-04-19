@@ -1,11 +1,9 @@
-package com.lrm.util;
+package com.irenia.blog.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by limi on 2017/10/15.
- */
+
 public class MD5Utils {
 
     /**
@@ -39,8 +37,7 @@ public class MD5Utils {
 
     }
 
-
     public static void main(String[] args) {
-        System.out.println(code("111111"));
+        System.out.println(code("199516"));
     }
 }
