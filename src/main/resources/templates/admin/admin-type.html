@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- 导航 -->
-<nav th:replace="admin/_fragments :: menu(1)"></nav>
+<nav th:replace="admin/_fragments :: menu(3)"></nav>
 <!-- 内容 -->
 <main class="main-container">
     <div class="m-padded-td-big">
@@ -18,37 +18,6 @@
                 <div class="ui pointing menu teal">
                     <a href="#" class="active item">列表</a>
                     <a href="#" class="item">发布</a>
-                </div>
-                <div class="ui segment center aligned">
-                    <form action="#" method="post" class="ui form">
-                        <div class="inline fields">
-                            <div class="five wide field">
-                                <input type="text" name="title" placeholder="标题">
-                            </div>
-                            <div class="five wide field">
-                                <div class="ui selection dropdown">
-                                    <input type="hidden" name="type">
-                                    <i class="dropdown icon"></i>
-                                    <div class="default text">分类</div>
-                                    <div class="menu">
-                                        <div class="item" data-value="1">错误日志</div>
-                                        <div class="item" data-value="2">开发者手册</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="three wide field">
-                                <div class="ui slider checkbox">
-                                    <input type="checkbox" name="recommend" id="recommend">
-                                    <label for="recommend">推荐</label>
-                                </div>
-                            </div>
-                            <div class="three wide field">
-                                <div class="ui button teal basic" style="width: 100%">
-                                    <i class="icon search"></i>搜索
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
                 <table class="ui single line fixed table rounded">
                     <thead>
