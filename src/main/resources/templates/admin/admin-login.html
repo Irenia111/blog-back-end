@@ -34,11 +34,8 @@
 
                     <div class="ui error mini message"></div>
                     <div class="ui negative mini message"
-                         th:unless="${#httpServletRequest.getParameter('message') ==
-null}"
-                         th:text="${#httpServletRequest.getParameter('message')}"
-                    ></div>
-
+                         th:unless="${#strings.isEmpty(message)}"
+                         th:text="${message}"></div>
                 </form>
                 <div class="ui message">
                     新用户？ <a href="login.php#">注册</a>

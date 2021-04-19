@@ -37,7 +37,7 @@ public class LoginController {
             session.setAttribute("user", user);
             return "/admin/admin-successLogin";
         } else {
-            attributes.addAttribute("message", "用户名或密码错误");
+            attributes.addFlashAttribute("message", "用户名或密码错误");
             return "redirect:/admin";//通过重定向方式回到登录页面，路由和文件url是不相同的
         }
     }
