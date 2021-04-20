@@ -61,6 +61,14 @@ public class TagController {
         return "redirect:/admin/tags";
     }
 
+    @GetMapping("/tags/{id}/input")
+    public String editInput(@PathVariable Long id,
+                            Model model) {
+        model.addAttribute("tag",
+                tagService.getTag(id).orElseThrow(() -> new NotFoundException("tag can not be found")));
+        return "admin/admin-tag-edit";
+    }
+
     @PostMapping("/tags/{id}")
     public String editPost(@Valid Tag tag,
                            BindingResult result,
@@ -80,15 +88,6 @@ public class TagController {
             attributes.addFlashAttribute("success", "更新成功");
         }
         return "redirect:/admin/tags";
-    }
-
-
-    @GetMapping("/tags/{id}/input")
-    public String editInput(@PathVariable Long id,
-                            Model model) {
-        model.addAttribute("tag",
-                tagService.getTag(id).orElseThrow(() -> new NotFoundException("tag can not be found")));
-        return "admin/admin-tag-edit";
     }
 
     @GetMapping("/tags/{id}/delete")
