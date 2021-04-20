@@ -1,4 +1,4 @@
-$('.message .close')
+$('.message')
     .on('click', function () {
         $(this)
             .closest('.message')

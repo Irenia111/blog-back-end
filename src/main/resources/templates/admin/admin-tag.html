@@ -16,12 +16,10 @@
             <div class="ui container">
                 <div style="min-height: 4em">
                     <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
-                        <i class="close icon"></i>
                         <div class="header">提示：</div>
                         <p th:text="${success}">操作成功！</p>
                     </div>
                     <div class="ui error mini message" th:unless="${#strings.isEmpty(error)}">
-                        <i class="close icon"></i>
                         <div class="header">提示：</div>
                         <p th:text="${error}">操作失败！</p>
                     </div>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -40,7 +42,7 @@ public class TypeController {
     }
 
     @PostMapping("/types")
-    public String post(Type type,
+    public String post(@Valid Type type,
                        BindingResult result,
                        RedirectAttributes attributes) {
         Type type1 = typeService.getTypeByName(type.getName());
@@ -58,8 +60,17 @@ public class TypeController {
         }
         return "redirect:/admin/types";
     }
+
+    @GetMapping("/types/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        model.addAttribute("type", typeService.getType(id).orElseThrow(() -> new NotFoundException("type can not be found")));
+        return "admin/admin-type-edit";
+    }
+
     @PostMapping("/types/{id}")
-    public String editPost(Type type, BindingResult result,@PathVariable Long id, RedirectAttributes attributes) {
+    public String editPost(@Valid Type type,
+                           BindingResult result,
+                           @PathVariable Long id, RedirectAttributes attributes) {
         Type type1 = typeService.getTypeByName(type.getName());
         if (type1 != null) {
             result.rejectValue("name","nameError","不能添加重复的分类");
@@ -74,13 +85,6 @@ public class TypeController {
             attributes.addFlashAttribute("success", "更新成功");
         }
         return "redirect:/admin/types";
-    }
-
-
-    @GetMapping("/types/{id}/input")
-    public String editInput(@PathVariable Long id, Model model) {
-        model.addAttribute("type", typeService.getType(id).orElseThrow(() -> new NotFoundException("type can not be found")));
-        return "admin/admin-type-edit";
     }
 
     @GetMapping("/types/{id}/delete")

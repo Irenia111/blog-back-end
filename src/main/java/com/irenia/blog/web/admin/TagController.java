@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -60,7 +62,7 @@ public class TagController {
     }
 
     @PostMapping("/tags/{id}")
-    public String editPost(Tag tag,
+    public String editPost(@Valid Tag tag,
                            BindingResult result,
                            @PathVariable Long id,
                            RedirectAttributes attributes) {
