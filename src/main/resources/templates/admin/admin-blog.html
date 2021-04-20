@@ -11,10 +11,19 @@
 <!-- 导航 -->
 <nav th:replace="admin/_fragments :: menu(1)"></nav>
 <!-- 内容 -->
-<main class="main-container">
-    <div class="m-padded-td-big">
+<main class="main-container" style="padding-top: 3em">
         <div class="m-container-small">
             <div class="ui container">
+                <div style="min-height: 4em">
+                    <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
+                        <div class="header">提示：</div>
+                        <p th:text="${success}">操作成功！</p>
+                    </div>
+                    <div class="ui error mini message" th:unless="${#strings.isEmpty(error)}">
+                        <div class="header">提示：</div>
+                        <p th:text="${error}">操作失败！</p>
+                    </div>
+                </div>
                 <div class="ui pointing menu teal">
                     <a href="#" class="active item">列表</a>
                     <a href="#" class="item">发布</a>
