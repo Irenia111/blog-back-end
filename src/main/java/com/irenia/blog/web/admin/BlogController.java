@@ -5,6 +5,7 @@ import com.irenia.blog.prototype.Blog;
 import com.irenia.blog.service.BlogService;
 import com.irenia.blog.service.TagService;
 import com.irenia.blog.service.TypeService;
+import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,8 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/admin")
 public class BlogController {
 
-    private static final String INPUT = "admin/blogs-input";
-    private static final String LIST = "admin/blogs";
+    private static final String INPUT = "admin/admin-blog-edit";
+    private static final String LIST = "admin/admin-blog";
     private static final String REDIRECT_LIST = "redirect:/admin/blogs";
 
     @Autowired
@@ -36,17 +37,20 @@ public class BlogController {
     public String blogList(
             @PageableDefault(
                     size = 10,
-                    sort = {"update"},
+                    sort = {"published"},
                     direction = Sort.Direction.DESC) Pageable pageable,
-            Blog blog, Model model) {
+            BlogQuery blog, Model model) {
         model.addAttribute("types", typeService.listType());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return LIST;
     }
 
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-                         Blog blog, Model model) {
+    public String search(@PageableDefault(size = 8,
+            sort = {"published"},
+            direction = Sort.Direction.DESC)
+                                 Pageable pageable,
+                         BlogQuery blog, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return "admin/blogs :: blogList";//返回的是一个fragment
     }
@@ -64,6 +68,7 @@ public class BlogController {
                 blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found")));
         return "admin/admin-blog-edit";
     }
+
 
     @GetMapping("/blogs/{id}/delete")
     public String delete(@PathVariable Long id,

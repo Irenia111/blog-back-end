@@ -5,6 +5,7 @@ import com.irenia.blog.dao.BlogRepository;
 import com.irenia.blog.prototype.Blog;
 import com.irenia.blog.prototype.Tag;
 import com.irenia.blog.prototype.Type;
+import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,35 +49,26 @@ public class BlogServiceImpl implements BlogService {
 
     @Transactional
     @Override
-    public Page<Blog> listBlog(Pageable pageable, Blog blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
+        //一开始传入了blog对象，但是网页初始化时，blog不存在，所以采用包装类BlogQuery避免该问题
         //动态查询
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
-            public Predicate toPredicate(Root<Blog> root,
-                                         CriteriaQuery<?> criteriaQuery,
-                                         CriteriaBuilder criteriaBuilder) {
-                //处理动态查询的条件
-                List<Predicate> predicateList = new ArrayList<>();
-                //title的like查询
-                if (!blog.getTitle().isEmpty() && blog.getTitle() != null) {
-                    predicateList.add(criteriaBuilder.like(root.<String>get("title"),
-                            "%" + blog.getTitle() + "%"));
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                List<Predicate> predicates = new ArrayList<>();
+                if (!"".equals(blog.getTitle()) && blog.getTitle() != null) {
+                    predicates.add(cb.like(root.<String>get("title"), "%"+blog.getTitle()+"%"));
                 }
-                //根据type的id进行查找
-                if (blog.getType().getId() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.<Type>get("type").get("id"),
-                            blog.getType().getId()));
+                if (blog.getTypeId() != null) {
+                    predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
                 }
-
-                //根据type的recommend进行查找
                 if (blog.isRecommend()) {
-                    predicateList.add(criteriaBuilder.equal(root.<Boolean>get("recommend"),
-                            blog.isRecommend()));
+                    predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
                 }
-                criteriaQuery.where(predicateList.toArray(new Predicate[0]));
+                cq.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
             }
-        }, pageable);
+        },pageable);
     }
 
     @Transactional
