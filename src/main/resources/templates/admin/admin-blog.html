@@ -21,73 +21,88 @@
                 </div>
                 <div class="ui segment center aligned">
                     <form action="#" method="post" class="ui form">
+                        <input type="hidden" name="page">
                         <div class="inline fields">
                             <div class="five wide field">
                                 <input type="text" name="title" placeholder="标题">
                             </div>
-                            <div class="five wide field">
+                            <div class="four wide field">
                                 <div class="ui selection dropdown">
                                     <input type="hidden" name="type">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">分类</div>
-                                    <div class="menu">
-                                        <div class="item" data-value="1">错误日志</div>
+                                    <div th:each="type : ${types}" class="menu">
+                                        <div class="item" data-value="1" data-value="1" th:data-value="${type.id}"
+                                             th:text="${type.name}">错误日志
+                                        </div>
+                                        <!--/*-->
                                         <div class="item" data-value="2">开发者手册</div>
+                                        <!--/*-->
                                     </div>
+
                                 </div>
                             </div>
+
                             <div class="three wide field">
                                 <div class="ui slider checkbox">
                                     <input type="checkbox" name="recommend" id="recommend">
                                     <label for="recommend">推荐</label>
                                 </div>
                             </div>
-                            <div class="three wide field">
-                                <div class="ui button teal basic" style="width: 100%">
+                            <div class="four wide field">
+                                <button id="clear-btn" class="ui button left floated">clear</button>
+                                <div id="search-btn" class="ui button teal basic" style="width: 100%">
                                     <i class="icon search"></i>搜索
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <table class="ui single line fixed table rounded">
-                    <thead>
-                    <tr class="center aligned">
-                        <th>序号</th>
-                        <th>标题</th>
-                        <th>类型</th>
-                        <th>推荐</th>
-                        <th>更新时间</th>
-                        <th colspan="2">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody class="center aligned">
-                    <tr>
-                        <td>1</td>
-                        <td>ssss</td>
-                        <td>类型</td>
-                        <td>是</td>
-                        <td>2021-04-02</td>
-                        <td class="right aligned">
-                            <a href="#" class="ui button mini green basic">编辑</a>
-                        </td>
-                        <td class="left aligned">
-                            <a href="#" class="ui button mini orange basic">删除</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th colspan="7">
-                            <div class="ui small pagination menu ">
-                                <a class="item">上一页</a>
-                                <a class="item">下一页</a>
-                            </div>
-                            <a href="#" class="ui button teal right floated basic">新增</a>
-                        </th>
-                    </tr>
-                    </tfoot>
-                </table>
+                <div id="table-container">
+                    <table th:fragment="blogList" class="ui single line fixed table rounded">
+                        <thead>
+                        <tr class="center aligned">
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>类型</th>
+                            <th>推荐</th>
+                            <th>更新时间</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="center aligned">
+                        <tr th:each="blog, iterStat : ${page.content} ">
+                            <td th:text="${iterStat.count}">1</td>
+                            <td th:text="${blog.title}">ssss</td>
+                            <td th:text="${blog.type.name}">类型</td>
+                            <td th:text="${blog.recommend} ? '是':'否'">是</td>
+                            <td th:text="${blog.update}">2021-04-02</td>
+                            <td class="right aligned">
+                                <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
+                                   class="ui button mini green basic">编辑</a>
+                            </td>
+                            <td class="left aligned">
+                                <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}"
+                                   class="ui button mini orange basic">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="7">
+                                <div class="ui small pagination menu " th:if="${page.totalPages}>1">
+                                    <a onclick="page(this)" th:attr="data-page = ${page.number} - 1" class="item"
+                                       th:unless="${page.first}">上一页</a>
+                                    <a onclick="page(this)" th:attr="data-page = ${page.number} + 1" class=" item"
+                                       th:unless="${page.last}">下一页</a>
+                                </div>
+                                <a href="#" th:href="@{/admin/blogs/input}"
+                                   class="ui button teal right floated basic">新增</a>
+                            </th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
