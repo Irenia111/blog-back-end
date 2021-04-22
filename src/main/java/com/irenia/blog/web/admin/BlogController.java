@@ -58,6 +58,8 @@ public class BlogController {
     @GetMapping("/blogs/input")
     public String input(Model model) {
         model.addAttribute("blog", new Blog());
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("types", typeService.listType());
         return "admin/admin-blog-edit";
     }
 

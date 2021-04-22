@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,12 +29,14 @@ public class BlogServiceImpl implements BlogService {
     private BlogRepository blogRepository;
 
     @Transactional
+    @Modifying
     @Override
     public Blog saveBlog(Blog blog) {
         return blogRepository.save(blog);
     }
 
     @Transactional
+    @Modifying
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         Blog oldBlog = blogRepository.findById(id).orElseThrow(() -> new NotFoundException("blog not found"));
@@ -72,6 +75,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Transactional
+    @Modifying
     @Override
     public void deleteBlog(Long id) {
         blogRepository.deleteById(id);

@@ -7,9 +7,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +20,7 @@ public class TagServiceImpl implements TagService {
     private TagRepository tagRepository;
 
     @Transactional
+    @Modifying
     @Override
     public Tag saveTag(Tag tag) {
         return tagRepository.save(tag);
@@ -43,6 +46,13 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    @Transactional
+    @Modifying
+    @Override
     public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRepository.findById(id).orElseThrow(() -> new NotFoundException("tag not found"));
         BeanUtils.copyProperties(tag, t);
@@ -50,6 +60,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Transactional
+    @Modifying
     @Override
     public void deleteTag(Long id) {
         tagRepository.deleteById(id);

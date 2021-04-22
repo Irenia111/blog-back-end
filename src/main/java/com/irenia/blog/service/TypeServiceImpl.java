@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,6 +20,7 @@ public class TypeServiceImpl implements TypeService{
     private TypeRepository typeRepository;
 
     @Transactional
+    @Modifying
     @Override
     public Type saveType(Type type) {
         return typeRepository.save(type);
@@ -47,6 +49,8 @@ public class TypeServiceImpl implements TypeService{
         return typeRepository.findAll();
     }
 
+    @Transactional
+    @Modifying
     @Override
     public Type updateType(Long id, Type type) {
         Type oldType = typeRepository.findById(id).orElseThrow(() -> new NotFoundException("type not found"));
@@ -55,6 +59,7 @@ public class TypeServiceImpl implements TypeService{
     }
 
     @Transactional
+    @Modifying
     @Override
     public void deleteType(Long id) {
         typeRepository.deleteById(id);
