@@ -1,6 +1,4 @@
-$('.ui.dropdown').dropdown();
-
-
+$('.ui.dropdown').dropdown({on : 'hover'});
 
 $('#clear-btn')
     .on('click', function() {
