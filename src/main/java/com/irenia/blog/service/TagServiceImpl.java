@@ -11,8 +11,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -48,6 +53,22 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<Tag> listTag() {
         return tagRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public List<Tag> listTag(String ids) {
+        List<Long> idList = getIdList(ids);
+        return tagRepository.findAllById(idList);
+    }
+
+    private List<Long> getIdList(String ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+        return Arrays.stream(ids.split(","))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
     }
 
     @Transactional

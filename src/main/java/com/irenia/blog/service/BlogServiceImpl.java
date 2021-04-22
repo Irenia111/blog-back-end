@@ -20,6 +20,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,13 @@ public class BlogServiceImpl implements BlogService {
     @Modifying
     @Override
     public Blog saveBlog(Blog blog) {
+        if (blog.getId() == null) {
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setViews(0);
+        } else {
+            blog.setUpdateTime(new Date());
+        }
         return blogRepository.save(blog);
     }
 
@@ -59,8 +67,9 @@ public class BlogServiceImpl implements BlogService {
             @Override
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
+                predicates.add(cb.equal(root.<Boolean>get("published"), true));
                 if (blog.getTitle() != null && !blog.getTitle().isEmpty()) {
-                    predicates.add(cb.like(root.<String>get("title"), "%"+blog.getTitle()+"%"));
+                    predicates.add(cb.like(root.<String>get("title"), "%" + blog.getTitle() + "%"));
                 }
                 if (blog.getTypeId() != null) {
                     predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
@@ -71,7 +80,23 @@ public class BlogServiceImpl implements BlogService {
                 cq.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;
             }
-        },pageable);
+        }, pageable);
+    }
+
+    @Transactional
+    @Override
+    public List<Blog> listUnpublishedBlog() {
+        //一开始传入了blog对象，但是网页初始化时，blog不存在，所以采用包装类BlogQuery避免该问题
+        //动态查询
+        return blogRepository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                List<Predicate> predicates = new ArrayList<>();
+                predicates.add(cb.equal(root.<Boolean>get("published"), false));
+                cq.where(predicates.toArray(new Predicate[predicates.size()]));
+                return null;
+            }
+        });
     }
 
     @Transactional

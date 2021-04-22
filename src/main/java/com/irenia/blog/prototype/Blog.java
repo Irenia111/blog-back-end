@@ -13,7 +13,11 @@ public class Blog {
     private Long id;//id为主键，自增长
 
     private String title;
-    private String content;
+
+    @Basic(fetch = FetchType.LAZY)//懒加载
+    @Lob
+    private String content;//设置content为长文本，不然String的长度是255
+
     private String firstPicture;
     private String flag;// 原创&转载
     private Integer views;//观看次数
@@ -40,6 +44,10 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
+
+
+    @Transient//不会加入数据库
+    private String tagIds;
 
     public Blog() {
     }
@@ -178,6 +186,14 @@ public class Blog {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override

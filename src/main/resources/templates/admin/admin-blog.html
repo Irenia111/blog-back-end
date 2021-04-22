@@ -12,22 +12,23 @@
 <nav th:replace="admin/_fragments :: menu(1)"></nav>
 <!-- 内容 -->
 <main class="main-container" style="padding-top: 3em">
-        <div class="m-container-small">
-            <div class="ui container">
-                <div style="min-height: 4em">
-                    <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
-                        <div class="header">提示：</div>
-                        <p th:text="${success}">操作成功！</p>
-                    </div>
-                    <div class="ui error mini message" th:unless="${#strings.isEmpty(error)}">
-                        <div class="header">提示：</div>
-                        <p th:text="${error}">操作失败！</p>
-                    </div>
+    <div class="m-container-small">
+        <div class="ui container">
+            <div style="min-height: 4em">
+                <div class="ui success mini message" th:unless="${#strings.isEmpty(success)}">
+                    <div class="header">提示：</div>
+                    <p th:text="${success}">操作成功！</p>
                 </div>
-                <div class="ui pointing menu teal">
-                    <a href="#" class="active item">列表</a>
-                    <a href="#" class="item">发布</a>
+                <div class="ui error mini message" th:unless="${#strings.isEmpty(error)}">
+                    <div class="header">提示：</div>
+                    <p th:text="${error}">操作失败！</p>
                 </div>
+            </div>
+            <div class="ui pointing menu teal">
+                <div class="active item" data-tab="published-blogs">已发布博客</div>
+                <div class="item" data-tab="unpublished-blogs">草稿箱</div>
+            </div>
+            <div class="ui active tab" data-tab="published-blogs">
                 <div class="ui segment center aligned">
                     <form action="#" method="post" class="ui form">
                         <input type="hidden" name="page">
@@ -43,7 +44,8 @@
                                     <div class="menu">
                                         <div class="item" data-value="1"
                                              th:each="type : ${types}"
-                                             th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
+                                             th:data-value="${type.id}" th:text="${type.name}">错误日志
+                                        </div>
                                         <!--/*-->
                                         <div class="item" data-value="2">开发者手册</div>
                                         <!--*/-->
@@ -80,12 +82,12 @@
                         </tr>
                         </thead>
                         <tbody class="center aligned">
-                        <tr th:each="blog, iterStat : ${page.content} ">
+                        <tr th:each="blog, iterStat : ${published.content} ">
                             <td th:text="${iterStat.count}">1</td>
                             <td th:text="${blog.title}">ssss</td>
                             <td th:text="${blog.type.name}">类型</td>
                             <td th:text="${blog.recommend} ? '是':'否'">是</td>
-                            <td th:text="${blog.update}">2021-04-02</td>
+                            <td th:text="${blog.updateTime}">2021-04-02</td>
                             <td class="right aligned">
                                 <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
                                    class="ui button mini green basic">编辑</a>
@@ -99,11 +101,11 @@
                         <tfoot>
                         <tr>
                             <th colspan="7">
-                                <div class="ui small pagination menu " th:if="${page.totalPages}>1">
-                                    <a onclick="page(this)" th:attr="data-page = ${page.number} - 1" class="item"
-                                       th:unless="${page.first}">上一页</a>
-                                    <a onclick="page(this)" th:attr="data-page = ${page.number} + 1" class=" item"
-                                       th:unless="${page.last}">下一页</a>
+                                <div class="ui small pagination menu " th:if="${published.totalPages}>1">
+                                    <a onclick="page(this)" th:attr="data-page = ${published.number} - 1" class="item"
+                                       th:unless="${published.first}">上一页</a>
+                                    <a onclick="page(this)" th:attr="data-page = ${published.number} + 1" class=" item"
+                                       th:unless="${published.last}">下一页</a>
                                 </div>
                                 <a href="#" th:href="@{/admin/blogs/input}"
                                    class="ui button teal right floated basic">新增</a>
@@ -113,7 +115,39 @@
                     </table>
                 </div>
             </div>
+            <div class="ui tab" data-tab="unpublished-blogs">
+                <table class="ui single line fixed table rounded">
+                    <thead>
+                    <tr class="center aligned">
+                        <th colspan="2">标题</th>
+                        <th>类型</th>
+                        <th>推荐</th>
+                        <th>更新时间</th>
+                        <th colspan="2">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="center aligned">
+                    <tr th:each="blog : ${unpublished}">
+                        <td colspan="2" th:text="${blog.title}">ssss</td>
+                        <td th:text="${blog.type.name}">类型</td>
+                        <td th:text="${blog.recommend} ? '是':'否'">是</td>
+                        <td th:text="${blog.updateTime}">2021-04-02</td>
+                        <td class="right aligned">
+                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
+                               class="ui button mini green basic">编辑</a>
+                        </td>
+                        <td class="left aligned">
+                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}"
+                               class="ui button mini orange basic">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
         </div>
+    </div>
     </div>
 </main>
 <!--页脚-->

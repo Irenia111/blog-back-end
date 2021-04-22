@@ -5,12 +5,14 @@ import com.irenia.blog.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BlogService {
     Optional<Blog> getBlog(Long id);
 
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
+    List<Blog> listUnpublishedBlog();
 
     Blog saveBlog(Blog blog);
 

@@ -1,4 +1,11 @@
 $('.ui.dropdown').dropdown({on : 'hover'});
+$('.menu .item').tab();
+$('.message')
+    .on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    });
 
 $('#clear-btn')
     .on('click', function() {

@@ -48,12 +48,12 @@
                             <textarea name="content" style="display:none;"></textarea>
                         </div>
                     </div>
-                    <div class="three fields">
-                        <div class="required field">
+                    <div class="fields">
+                        <div class="required four wide field">
                             <div class="ui action labeled input">
                                 <div class="ui label teal basic">分类</div>
                                 <div class="ui dropdown fluid selection">
-                                    <input type="hidden" th:value="*{type}!=null ? *{type.id}" name="type.id">
+                                    <input type="hidden"name="type.id" th:value="*{type} != null ? *{type.id}" >
                                     <div class="default text"></div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
@@ -62,15 +62,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="required field">
+                        <div class="twelve wide field">
                             <div class="ui action labeled input">
                                 <div class="ui label teal basic">标签</div>
                                 <div class="ui dropdown fluid multiple search selection">
-                                    <input type="hidden" name="tag">
+                                    <input type="hidden" name="tagIds" th:value="*{tagIds}">
+                                    <div class="default text"></div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
-                                        <div class="item" data-value="1">java</div>
-                                        <div class="item" data-value="2">js</div>
+                                        <div th:each="tag : ${tags}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}">js</div>
                                     </div>
                                 </div>
                             </div>
