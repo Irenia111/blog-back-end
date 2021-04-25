@@ -4,6 +4,7 @@ import com.irenia.blog.NotFoundException;
 import com.irenia.blog.dao.BlogRepository;
 import com.irenia.blog.prototype.Blog;
 import com.irenia.blog.prototype.Type;
+import com.irenia.blog.util.MyBeanUtils;
 import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,12 @@ public class BlogServiceImpl implements BlogService {
     @Modifying
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        System.out.println("sssss");
         System.out.println(blog.getFlag());
-        //这里会存在更新无法保存的状况，因为源对象有null值，在使用BeanUtils来copy时null值会覆盖目标对象的同名字段属性值
         Blog oldBlog = blogRepository.findById(id).orElseThrow(() -> new NotFoundException("blog not found"));
-        BeanUtils.copyProperties(blog, oldBlog);
+        //这里会存在更新无法保存的状况，因为源对象有null值，在使用BeanUtils来copy时null值会覆盖目标对象的同名字段属性值
+        //创建时间会为null，还有view等数据
+        //传入为null的属性，null值属性不做设置
+        BeanUtils.copyProperties(blog, oldBlog, MyBeanUtils.getNullPropertyNames(blog));
         oldBlog.setUpdateTime(new Date());
         return blogRepository.save(oldBlog);
     }

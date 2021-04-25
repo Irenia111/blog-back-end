@@ -17,7 +17,6 @@ public class Blog {
     @Basic(fetch = FetchType.LAZY)//懒加载
     @Lob
     private String content;//设置content为长文本，不然String的长度是255
-
     private String description;
     private String firstPicture;
     private Integer views;//观看次数
