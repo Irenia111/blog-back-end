@@ -22,19 +22,18 @@
                       th:object="${blog}" th:action="@{/admin/blogs}"
                       class="ui form">
                     <input type="hidden" name="published" th:value="*{published}">
+                    <input type="hidden" name="id" th:value="*{id}">
                     <div class="required field">
                         <div class="ui left labeled input">
                             <div class="ui section dropdown teal basic label">
-                                <input type="hidden" value="原创">
-                                <div class="text">原创</div>
+                                <input type="hidden" name="flag.id" th:value="*{flag} != null ? *{flag.id}">
+                                <div class="text" th:text="*{flag} != null ? *{flag.name} : '原创'"></div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
-                                    <div class="item" data-value="原创">原创</div>
-                                    <div class="item" data-value="转载">转载</div>
-                                    <div class="item" data-value="翻译">翻译</div>
+                                    <div th:each="flag : ${flags}" class="item" data-value="1" th:data-value="${flag.id}" th:text="${flag.name}">原创</div>
                                 </div>
                             </div>
-                            <input type="text" name="title" placeholder="标题">
+                            <input type="text" name="title" placeholder="标题" th:value="*{title}">
                         </div>
                     </div>
                     <div class="required field">
@@ -53,7 +52,7 @@
                             <div class="ui action labeled input">
                                 <div class="ui label teal basic">分类</div>
                                 <div class="ui dropdown fluid selection">
-                                    <input type="hidden"name="type.id" th:value="*{type} != null ? *{type.id}" >
+                                    <input type="hidden"name="type.id" th:value="*{type} != null ? *{type.id}">
                                     <div class="default text"></div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
@@ -76,36 +75,50 @@
                             </div>
                         </div>
                     </div>
+                    <div class="required field">
+                        <textarea name="description" th:text="*{description}" placeholder="博客描述..." maxlength="200"></textarea>
+                    </div>
                     <div class="fields">
                         <div class="field">
                             <div class="ui slider checkbox">
-                                <input type="checkbox" id="recommend" name="recommend" class="hidden">
+                                <input type="checkbox" id="recommend" name="recommend"
+                                       class="hidden"
+                                       th:checked="*{recommend}"
+                                >
                                 <label for="recommend">推荐</label>
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui slider checkbox">
-                                <input type="checkbox" id="copyright-info" name="copyright-info" class="hidden">
-                                <label for="copyright-info">转载声明</label>
+                                <input type="checkbox" id="shareStatement" name="shareStatement"
+                                       class="hidden"
+                                       checked th:checked="*{shareStatement}"
+                                >
+                                <label for="shareStatement">转载声明</label>
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui slider checkbox">
-                                <input type="checkbox" id="great" name="great" class="hidden">
-                                <label for="great">赞赏</label>
+                                <input type="checkbox" id="appreciation" name="appreciation" class="hidden"
+                                       th:checked="*{appreciation}"
+                                >
+                                <label for="appreciation">赞赏</label>
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui slider checkbox">
-                                <input type="checkbox" id="comment" name="comment" class="hidden">
-                                <label for="comment">留言</label>
+                                <input type="checkbox" id="commentable" name="commentable" class="hidden"
+                                       checked th:checked="*{commentable}"
+                                >
+                                <label for="commentable">留言</label>
                             </div>
                         </div>
                     </div>
                     <div class="ui error message"></div>
                     <div class="ui container right aligned" style="margin-top: 2em">
                         <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                        <button type="button" id="save-btn" class="ui secondary button">保存</button>
+                        <button type="button" id="save-btn" th:if="*{published == false}"
+                                class="ui secondary button">保存</button>
                         <button type="button" id="publish-btn" class="ui teal button">发布</button>
                     </div>
                 </form>

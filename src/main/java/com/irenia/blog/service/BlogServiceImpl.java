@@ -3,7 +3,6 @@ package com.irenia.blog.service;
 import com.irenia.blog.NotFoundException;
 import com.irenia.blog.dao.BlogRepository;
 import com.irenia.blog.prototype.Blog;
-import com.irenia.blog.prototype.Tag;
 import com.irenia.blog.prototype.Type;
 import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -19,8 +18,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,9 +46,13 @@ public class BlogServiceImpl implements BlogService {
     @Modifying
     @Override
     public Blog updateBlog(Long id, Blog blog) {
+        System.out.println("sssss");
+        System.out.println(blog.getFlag());
+        //这里会存在更新无法保存的状况，因为源对象有null值，在使用BeanUtils来copy时null值会覆盖目标对象的同名字段属性值
         Blog oldBlog = blogRepository.findById(id).orElseThrow(() -> new NotFoundException("blog not found"));
         BeanUtils.copyProperties(blog, oldBlog);
-        return blogRepository.save(blog);
+        oldBlog.setUpdateTime(new Date());
+        return blogRepository.save(oldBlog);
     }
 
     @Transactional

@@ -3,9 +3,7 @@ package com.irenia.blog.web.admin;
 import com.irenia.blog.NotFoundException;
 import com.irenia.blog.prototype.Blog;
 import com.irenia.blog.prototype.User;
-import com.irenia.blog.service.BlogService;
-import com.irenia.blog.service.TagService;
-import com.irenia.blog.service.TypeService;
+import com.irenia.blog.service.*;
 import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +33,8 @@ public class BlogController {
     private TypeService typeService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private FlagService flagService;
 
     @GetMapping("/blogs")
     public String blogList(@PageableDefault(size = 8,
@@ -63,6 +63,7 @@ public class BlogController {
         model.addAttribute("blog", new Blog());
         model.addAttribute("types", typeService.listType());
         model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("flags", flagService.listFlag());
         return INPUT;
     }
 
@@ -71,6 +72,8 @@ public class BlogController {
         blog.setUser((User) session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()).orElseThrow(() -> new NotFoundException("type not found")));
         blog.setTags(tagService.listTag(blog.getTagIds()));
+        System.out.println(blog.getFlag().getId());
+        blog.setFlag(flagService.getFlag(blog.getFlag().getId()).orElseThrow(() -> new NotFoundException("flag not found")));
         Blog b;
         if (blog.getId() == null) {
             b = blogService.saveBlog(blog);
@@ -89,8 +92,12 @@ public class BlogController {
     @GetMapping("/blogs/{id}/input")
     public String editInput(@PathVariable Long id,
                             Model model) {
-        model.addAttribute("blog",
-                blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found")));
+        Blog b = blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found"));
+        System.out.println(b.getFlag());
+        model.addAttribute("blog", b);
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("flags", flagService.listFlag());
         return "admin/admin-blog-edit";
     }
 

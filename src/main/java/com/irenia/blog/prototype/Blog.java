@@ -18,8 +18,8 @@ public class Blog {
     @Lob
     private String content;//设置content为长文本，不然String的长度是255
 
+    private String description;
     private String firstPicture;
-    private String flag;// 原创&转载
     private Integer views;//观看次数
     private boolean appreciation;
     private boolean shareStatement;
@@ -34,6 +34,9 @@ public class Blog {
 
     @ManyToOne
     private Type type;
+
+    @ManyToOne
+    private FlagType flag;// 原创&转载
 
     @ManyToMany(cascade = {CascadeType.PERSIST})//级联新增，新增blog时创建新的tag
     private List<Tag> tags = new ArrayList<>();
@@ -50,6 +53,11 @@ public class Blog {
     private String tagIds;
 
     public Blog() {
+        appreciation = true;
+        shareStatement = true;
+        commentable = true;
+        published = false;
+        recommend = true;
     }
 
     public Long getId() {
@@ -76,20 +84,20 @@ public class Blog {
         this.content = content;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getFirstPicture() {
         return firstPicture;
     }
 
     public void setFirstPicture(String firstPicture) {
         this.firstPicture = firstPicture;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
     }
 
     public Integer getViews() {
@@ -162,6 +170,14 @@ public class Blog {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public FlagType getFlag() {
+        return flag;
+    }
+
+    public void setFlag(FlagType flag) {
+        this.flag = flag;
     }
 
     public List<Tag> getTags() {

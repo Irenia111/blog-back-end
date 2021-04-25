@@ -23,6 +23,13 @@ $('#blog-form').form({
                 type: 'empty',
                 prompt: '分类：请输入博客分类'
             }]
+        },
+        description : {
+            identifier: 'description',
+            rules: [{
+                type : 'empty',
+                prompt: '标题：请输入博客描述'
+            }]
         }
     }
 });
