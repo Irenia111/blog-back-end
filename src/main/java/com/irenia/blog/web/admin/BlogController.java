@@ -54,8 +54,9 @@ public class BlogController {
             direction = Sort.Direction.DESC)
                                  Pageable pageable,
                          BlogQuery blog, Model model) {
-        model.addAttribute("page", blogService.listBlog(pageable, blog));
-        return "admin/blogs :: blogList";//返回的是一个fragment
+        System.out.println(blog.getTypeId());
+        model.addAttribute("published", blogService.listBlog(pageable, blog));
+        return "admin/admin-blog::blogList";//返回的是一个fragment
     }
 
     @GetMapping("/blogs/input")
@@ -72,7 +73,6 @@ public class BlogController {
         blog.setUser((User) session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()).orElseThrow(() -> new NotFoundException("type not found")));
         blog.setTags(tagService.listTag(blog.getTagIds()));
-        System.out.println(blog.getFlag().getId());
         blog.setFlag(flagService.getFlag(blog.getFlag().getId()).orElseThrow(() -> new NotFoundException("flag not found")));
         Blog b;
         if (blog.getId() == null) {

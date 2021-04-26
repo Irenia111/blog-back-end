@@ -5,3 +5,9 @@ spring:
     cache: false
   profiles:
     active: dev
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
