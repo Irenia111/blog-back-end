@@ -25,7 +25,7 @@ public class IndexController {
     private TagService tagService;
 
     @GetMapping("/")
-    public String index(@PageableDefault(size = 4, sort = {"updateTime"},
+    public String index(@PageableDefault(size = 6, sort = {"updateTime"},
             direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
         // throw new NotFoundException("页面未找到");
