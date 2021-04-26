@@ -20,6 +20,8 @@ public interface TagService {
 
     List<Tag> listTag(String ids);
 
+    List<Tag> listTopTag(Integer size);
+
     Tag updateTag(Long id, Tag type);
 
     void deleteTag(Long id);

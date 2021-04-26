@@ -6,7 +6,9 @@ import com.irenia.blog.prototype.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,13 @@ public class TagServiceImpl implements TagService {
     public List<Tag> listTag(String ids) {
         List<Long> idList = getIdList(ids);
         return tagRepository.findAllById(idList);
+    }
+
+    @Transactional
+    @Override
+    public List<Tag> listTopTag(Integer size) {
+        Pageable pageable = PageRequest.of(0,size, Sort.by(Sort.Direction.DESC, "blogs.size"));
+        return tagRepository.findTop(pageable);
     }
 
     private List<Long> getIdList(String ids) {
