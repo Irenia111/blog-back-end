@@ -14,7 +14,7 @@ public class Tag {
     @NotBlank(message = "分类名称不能为空")
     private String name;
 
-    @ManyToMany()
+    @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
 
     public Tag() {
@@ -36,6 +36,13 @@ public class Tag {
         this.id = id;
     }
 
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
+    }
     @Override
     public String toString() {
         return "Tag{" +

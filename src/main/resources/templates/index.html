@@ -127,13 +127,15 @@
                             <!--*/-->
                         </div>
                         <!----- bottom ----->
-                        <div class="ui bottom segment attached">
+                        <div class="ui bottom segment attached" th:if="${blogs.totalPages} > 1">
                             <div class="ui middle aligned two column grid">
                                 <div class="column">
-                                    <a class="ui mini pink basic button">上一页</a>
+                                    <a class="ui mini pink basic button"
+                                       th:href="@{/(page=${blogs.number} - 1)}">上一页</a>
                                 </div>
                                 <div class="column right aligned">
-                                    <a class="ui mini pink basic button">下一页</a>
+                                    <a class="ui mini pink basic button"
+                                       th:href="@{/(page=${blogs.number} + 1)}">下一页</a>
                                 </div>
                             </div>
                         </div>
@@ -150,11 +152,15 @@
                             </div>
                             <div class="ui pink segment">
                                 <div class="ui fluid vertical menu">
-                                    <a th:each="type : ${types}" href="#"
-                                       target="_blank" class="m-black item"
-                                       th:text="${type.name}">
+                                    <a th:each="type : ${types}"
+                                       target="_blank"
+                                       class="m-black item"
+                                       th:if="${type.blogs.size() > 0}"
+                                    >
+                                        <span th:text="${type.name}"></span>
                                         <div class="ui tag label basic pink left pointing"
-                                             th:text="${type.blogs.size()} > 0 ? ${type.blogs.size()} : ''">13
+                                             th:text="${type.blogs.size()}">
+                                            13
                                         </div>
                                     </a>
                                     <!--/*-->
@@ -190,12 +196,14 @@
                                 </div>
                             </div>
                             <div class="ui pink segment">
-                                <a th:each="tag : ${tags}" target="_blank"
+                                <a th:each="tag : ${tags}"
+                                   target="_blank"
                                    class="ui tag label basic pink left pointing m-margin-td"
-                                   th:text="${tag.name}"
                                 >
-                                    前端
-                                    <div class="detail" th:text="${tag.blogs.size()}">13</div>
+                                    <span th:text="${tag.name}">前端</span>
+                                    <div class="detail" th:if="${tag.blogs.size() > 0}" th:text="${tag.blogs.size()}">
+                                        13
+                                    </div>
                                 </a>
                                 <!--/*-->
                                 <a target="_blank" class="ui tag label basic pink left pointing m-margin-td">
