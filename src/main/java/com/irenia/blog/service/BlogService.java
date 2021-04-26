@@ -12,7 +12,9 @@ public interface BlogService {
     Optional<Blog> getBlog(Long id);
 
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
+    Page<Blog> listBlog(Pageable pageable);
     List<Blog> listUnpublishedBlog();
+    List<Blog> listRecommendBlog(Integer size);
 
     Blog saveBlog(Blog blog);
 

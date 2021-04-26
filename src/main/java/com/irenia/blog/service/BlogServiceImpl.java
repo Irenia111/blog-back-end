@@ -9,7 +9,9 @@ import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -88,6 +90,11 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
+    @Override
+    public Page<Blog> listBlog(Pageable pageable) {
+        return blogRepository.findAll(pageable);
+    }
+
     @Transactional
     @Override
     public List<Blog> listUnpublishedBlog() {
@@ -102,6 +109,12 @@ public class BlogServiceImpl implements BlogService {
                 return null;
             }
         });
+    }
+
+    @Override
+    public List<Blog> listRecommendBlog(Integer size) {
+        Pageable pageable = PageRequest.of(0,size,Sort.by(Sort.Direction.DESC, "views"));
+        return blogRepository.findTop(pageable);
     }
 
     @Transactional
