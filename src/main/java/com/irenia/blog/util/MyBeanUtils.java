@@ -15,8 +15,8 @@ public class MyBeanUtils {
 
     /**
      * 获取所有的属性值为空属性名数组
-     * @param source
-     * @return
+     * @param source Object
+     * @return String[]
      */
     public static String[] getNullPropertyNames(Object source) {
         BeanWrapper beanWrapper = new BeanWrapperImpl(source);
@@ -28,7 +28,7 @@ public class MyBeanUtils {
                 nullPropertyNames.add(propertyName);
             }
         }
-        return nullPropertyNames.toArray(new String[nullPropertyNames.size()]);
+        return nullPropertyNames.toArray(new String[0]);
     }
 
 }
