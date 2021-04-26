@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -35,5 +37,13 @@ public class IndexController {
         model.addAttribute("types", typeService.listTopType(8));
         model.addAttribute("tags", tagService.listTopTag(10));
         return "index";
+    }
+
+    @PostMapping("/search")
+    public String search(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                         @RequestParam String query, Model model) {
+        model.addAttribute("queryBlogs", blogService.listBlog("%"+query+"%", pageable));
+        model.addAttribute("query", query);
+        return "search";
     }
 }

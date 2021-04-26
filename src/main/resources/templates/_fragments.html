@@ -10,13 +10,16 @@
 <!--导航-->
 <div th:fragment="slider(n)" class="ui sidebar inverted vertical menu uncover animating">
     <div class="item">
-        <div class="ui inverted transparent input">
-            <input type="text" placeholder="搜索"/>
-            <i class="search link icon"></i>
-        </div>
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+            <div class="ui inverted transparent input">
+                <input type="text" name="query" placeholder="搜索" th:value="${query}"/>
+                <i onclick="document.forms['search'].submit()"
+                   class="search link icon"></i>
+            </div>
+        </form>
     </div>
-    <a class="ui item" th:classappend="${n == 1} ? 'm-pink'">首页<i class="book icon" ></i></a>
-    <a class="ui item" th:classappend="${n == 2} ? 'm-pink'">分类<i class="folder open icon" ></i></a>
+    <a class="ui item" th:classappend="${n == 1} ? 'm-pink'">首页<i class="book icon"></i></a>
+    <a class="ui item" th:classappend="${n == 2} ? 'm-pink'">分类<i class="folder open icon"></i></a>
     <a class="ui item" th:classappend="${n == 3} ? 'm-pink'">标签<i class="tags icon"></i></a>
     <a class="ui item" th:classappend="${n == 4} ? 'm-pink'">归档<i class="archive icon"></i></a>
     <a class="ui item" th:classappend="${n == 5} ? 'm-pink'">关于我<i class="sign language icon"></i></a>
@@ -43,10 +46,15 @@
         关于我<i class="sign language icon"></i>
     </a>
     <div class="right item m-mobile-hide">
-        <div class="ui inverted transparent icon input">
-            <input type="text" placeholder="... ... ..."/>
-            <i class="search link icon"></i>
-        </div>
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+            <div class="ui inverted transparent icon input">
+                <input type="text" name="query"
+                       th:value="${query}"
+                       placeholder="... ... ..."/>
+                <i onclick="document.forms['search'].submit()"
+                   class="search link icon"></i>
+            </div>
+        </form>
     </div>
 </nav>
 
