@@ -93,12 +93,12 @@ public class BlogController {
     public String editInput(@PathVariable Long id,
                             Model model) {
         Blog b = blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found"));
-        System.out.println(b.getFlag());
+        b.init();//传入tags
         model.addAttribute("blog", b);
         model.addAttribute("types", typeService.listType());
         model.addAttribute("tags", tagService.listTag());
         model.addAttribute("flags", flagService.listFlag());
-        return "admin/admin-blog-edit";
+        return INPUT;
     }
 
 
