@@ -61,4 +61,11 @@ public class IndexController {
                tagService.listTag());
         return "tags";
     }
+
+    @GetMapping("/type")
+    public  String type(Model model) {
+        model.addAttribute("types",
+                typeService.listType());
+        return "types";
+    }
 }
