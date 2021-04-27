@@ -48,7 +48,7 @@ public class IndexController {
     }
 
     @GetMapping("/blog/{id}")
-    public String editInput(@PathVariable Long id,
+    public String blog(@PathVariable Long id,
                             Model model) {
         model.addAttribute("blog",
                 blogService.getHTMLContentBlog(id));
