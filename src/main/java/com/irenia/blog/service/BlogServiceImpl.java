@@ -17,10 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.ArrayList;
@@ -51,7 +48,8 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         System.out.println(blog.getFlag());
-        Blog oldBlog = blogRepository.findById(id).orElseThrow(() -> new NotFoundException("blog not found"));
+        Blog oldBlog = blogRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("blog not found"));
         //这里会存在更新无法保存的状况，因为源对象有null值，在使用BeanUtils来copy时null值会覆盖目标对象的同名字段属性值
         //创建时间会为null，还有view等数据
         //传入为null的属性，null值属性不做设置
@@ -134,6 +132,17 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
         return blogRepository.findByQuery(query,pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(Long tagId, Pageable pageable) {
+        return blogRepository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                Join join = root.join("tags");
+                return cb.equal(join.get("id"),tagId);
+            }
+        }, pageable);
     }
 
     @Transactional

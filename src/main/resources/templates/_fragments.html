@@ -30,19 +30,19 @@
     </a>
     <div class="ui right item m-mobile-show m-pink">Irenia</div>
     <h2 class="ui pink header item m-mobile-hide">Irenia</h2>
-    <a class="ui item m-mobile-hide" th:classappend="${n == 1} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/}" th:classappend="${n == 1} ? 'm-pink'">
         <i class="book icon"></i>首页
     </a>
-    <a class="ui item m-mobile-hide" th:classappend="${n == 2} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/tag/-1}" th:classappend="${n == 2} ? 'm-pink'">
         <i class="folder open icon"></i>分类
     </a>
-    <a class="ui item m-mobile-hide" th:classappend="${n == 3} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/type/-1}" th:classappend="${n == 3} ? 'm-pink'">
         <i class="tags icon"></i>标签
     </a>
-    <a class="ui item m-mobile-hide" th:classappend="${n == 4} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/archieve}" th:classappend="${n == 4} ? 'm-pink'">
         <i class="archive icon"></i>归档
     </a>
-    <a class="ui item m-mobile-hide" th:classappend="${n == 5} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/about}" th:classappend="${n == 5} ? 'm-pink'">
         关于我<i class="sign language icon"></i>
     </a>
     <div class="right item m-mobile-hide">

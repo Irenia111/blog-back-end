@@ -25,6 +25,7 @@
                             </div>
                             <div class="ui pink segment">
                                 <a th:each="tag : ${tags}"
+                                   th:href="@{/tag/{id}(id=${tag.id})}"
                                    th:if="${tag.blogs.size > 0}"
                                    target="_blank"
                                    class="ui tag label pink basic left pointing large m-margin-td">

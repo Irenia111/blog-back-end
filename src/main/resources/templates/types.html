@@ -25,6 +25,7 @@
                             <div class="ui pink segment">
                                 <div class="ui fluid vertical menu">
                                     <a th:each="type : ${types}"
+                                       th:href="@{/type/{id}(id=${type.id})}"
                                        target="_blank"
                                        class="m-black item"
                                        th:classappend="${type.id==activeTypeId} ? 'active'"

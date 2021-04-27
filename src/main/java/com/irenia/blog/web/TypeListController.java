@@ -29,7 +29,7 @@ public class TypeListController {
                     Pageable pageable,
             @PathVariable Long id,
             Model model) {
-        List<Type> types = typeService.listType();
+        List<Type> types = typeService.listTopType(1000);//这里要找博客最多的type
         //直接访问types页面时，将第一个type的id作为默认id
         if (id == -1) {
             id = types.get(0).getId();
