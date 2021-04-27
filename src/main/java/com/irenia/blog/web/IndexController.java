@@ -54,4 +54,11 @@ public class IndexController {
                 blogService.getHTMLContentBlog(id));
         return "blog";
     }
+
+    @GetMapping("/tag")
+    public  String tag(Model model){
+        model.addAttribute("tags",
+               tagService.listTag());
+        return "tags";
+    }
 }

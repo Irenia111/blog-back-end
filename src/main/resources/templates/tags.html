@@ -20,25 +20,12 @@
                     <div class="five wide column center aligned">
                         <!----- 标签 ----->
                         <div class="ui segment">
-                            <a target="_blank" class="ui tag label pink basic left pointing large m-margin-td">
-                                前端
-                                <div class="detail">13</div>
-                            </a>
-                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
-                                网sss络
-                                <div class="detail">23</div>
-                            </a>
-                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
-                                网络
-                                <div class="detail">23</div>
-                            </a>
-                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
-                                学习笔记
-                                <div class="detail">23</div>
-                            </a>
-                            <a target="_blank" class="ui tag label basic left pointing large m-margin-td">
-                                学习笔记
-                                <div class="detail">23</div>
+                            <a th:each="tag : ${tags}"
+                               th:if="${tag.blogs.size > 0}"
+                               target="_blank"
+                               class="ui tag label pink basic left pointing large m-margin-td">
+                                <span th:text="${tag.name}"></span>
+                                <div class="detail" th:text="${tag.name}">13</div>
                             </a>
                         </div>
                     </div>
@@ -153,11 +140,13 @@
         </div>
     </div>
     <!--页脚-->
-    <footer th:replace="_fragments :: footer_mobile" class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
-    <footer th:replace="_fragments :: footer_pc" class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
+    <footer th:replace="_fragments :: footer_mobile"
+            class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
+    <footer th:replace="_fragments :: footer_pc"
+            class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
 </main>
 <script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js" ></script>
+<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js"></script>
 </body>
 </html>
