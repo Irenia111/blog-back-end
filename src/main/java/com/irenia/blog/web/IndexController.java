@@ -2,6 +2,7 @@ package com.irenia.blog.web;
 
 
 // import com.irenia.blog.NotFoundException;
+import com.irenia.blog.NotFoundException;
 import com.irenia.blog.service.BlogService;
 import com.irenia.blog.service.TagService;
 import com.irenia.blog.service.TypeService;
@@ -31,7 +32,6 @@ public class IndexController {
             direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
         // throw new NotFoundException("页面未找到");
-        System.out.println("------index------");
         model.addAttribute("blogs", blogService.listBlog(pageable));
         model.addAttribute("recommendBlogs", blogService.listRecommendBlog(8));
         model.addAttribute("types", typeService.listTopType(8));
@@ -45,5 +45,13 @@ public class IndexController {
         model.addAttribute("queryBlogs", blogService.listBlog("%"+query+"%", pageable));
         model.addAttribute("query", query);
         return "search";
+    }
+
+    @GetMapping("/blog/{id}")
+    public String editInput(@PathVariable Long id,
+                            Model model) {
+        model.addAttribute("blog",
+                blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found")));
+        return "blog";
     }
 }

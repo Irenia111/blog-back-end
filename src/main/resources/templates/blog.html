@@ -23,27 +23,38 @@
                             <div class="ui horizontal link list">
                                 <div class="item">
                                     <img src="https://picsum.photos/id/0/100/100" alt=""
+                                         th:src="@{${blog.user.avatar}}"
                                          class="ui avatar image">
-                                    <div class="content"><span>Irenia</span></div>
+                                    <div class="content">
+                                        <span th:text="${blog.user.nickname}">Irenia</span>
+                                    </div>
                                 </div>
                                 <div class="item">
-                                    <span class="content"><i class="calendar icon"></i>2021-03-21</span>
+                                    <span class="content">
+                                        <i class="calendar icon"></i>
+                                        <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
+                                    </span>
                                 </div>
                                 <div class="item">
-                                    <span class="content"><i class="eye icon"></i>2</span>
+                                    <span class="content">
+                                        <i class="eye icon"></i>
+                                    <span th:text="${blog.views}">2342</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <!-- images -->
                         <div class="ui segment attached m-mobile-hide">
-                            <img src="https://picsum.photos/id/200/800/450" alt="" class="ui rounded fluid image">
+                            <img src="https://picsum.photos/id/200/800/450" alt=""
+                                 th:src="@{${blog.firstPicture}}"
+                                 class="ui rounded fluid image">
                         </div>
                         <!-- content -->
                         <div id="blog-content" class="ui segment padded attached bottom">
                             <div class="ui right aligned basic segment">
-                                <div class="ui label orange basic">原创</div>
+                                <div class="ui label orange basic" th:text="${blog.flag}">原创</div>
                             </div>
-                            <h2 class="ui center aligned header">sdsdssdsd</h2>
+                            <h2 class="ui center aligned header" th:text="${blog.title}">sdsdssdsd</h2>
                             <div id="content" class="m-padded-rl-response typo typo-selection">
                                 <h1 class="dn">
                                     <a href="http://tscanlin.github.io/tocbot">Tocbot</a>
@@ -311,16 +322,21 @@ tocbot.destroy();</code></pre>
                                 <h2 id="license">License</h2>
                                 <p><a href="http://opensource.org/licenses/MIT">MIT</a></p>
 
-
                             </div>
                             <!-- tag -->
-                            <div class="ui segment basic">
-                                <div class="ui pink tag label">方法论</div>
+                            <div class="ui segment basic" th:if="${blog.tags.size > 0}">
+                                <div class="ui pink tag label" th:each="tag : ${blog.tags}" th:text="${tag.name}">>方法论</div>
                             </div>
                             <!-- info -->
                             <div class="ui segment basic">
-                                <div class="ui positive message">
+                                <div class="ui positive message" th:if="${blog.shareStatement}">
                                     <p>版权声明</p>
+                                    <ui class="list">
+                                        <li>作者：<span th:text="${blog.user.nickname}">李仁密</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a></li>
+                                        <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2017-10-02 09:08</span></li>
+                                        <li>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）</li>
+                                        <li>公众号转载：请在文末添加作者公众号二维码</li>
+                                    </ui>
                                 </div>
                             </div>
                         </div>
@@ -492,8 +508,10 @@ tocbot.destroy();</code></pre>
         </div>
     </div>
     <!--页脚-->
-    <footer th:replace="_fragments :: footer_mobile" class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
-    <footer th:replace="_fragments :: footer_pc" class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
+    <footer th:replace="_fragments :: footer_mobile"
+            class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
+    <footer th:replace="_fragments :: footer_pc"
+            class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
 </main>
 <script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
@@ -501,6 +519,6 @@ tocbot.destroy();</code></pre>
 <script type="text/javascript" th:src="@{lib/tocbot/tocbot.min.js}" src="../static/lib/tocbot/tocbot.min.js"></script>
 <script type="text/javascript" th:src="@{lib/qrcode/qrcode.min.js}" src="../static/lib/qrcode/qrcode.min.js"></script>
 <script type="text/javascript" th:src="@{js/blog.js}" src="../static/js/blog.js"></script>
-<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js" ></script>
+<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js"></script>
 </body>
 </html>
