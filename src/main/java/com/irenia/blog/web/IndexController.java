@@ -51,7 +51,7 @@ public class IndexController {
     public String editInput(@PathVariable Long id,
                             Model model) {
         model.addAttribute("blog",
-                blogService.getBlog(id).orElseThrow(() -> new NotFoundException("blog can not be found")));
+                blogService.getHTMLContentBlog(id));
         return "blog";
     }
 }

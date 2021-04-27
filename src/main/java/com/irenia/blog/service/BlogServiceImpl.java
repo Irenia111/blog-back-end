@@ -4,6 +4,7 @@ import com.irenia.blog.NotFoundException;
 import com.irenia.blog.dao.BlogRepository;
 import com.irenia.blog.prototype.Blog;
 import com.irenia.blog.prototype.Type;
+import com.irenia.blog.util.MarkdownUtils;
 import com.irenia.blog.util.MyBeanUtils;
 import com.irenia.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -63,6 +64,19 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Optional<Blog> getBlog(Long id) {
         return blogRepository.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public Blog getHTMLContentBlog(Long id) {
+        Blog HTMLBlog = new Blog();
+        Blog blog = blogRepository
+                .findById(id)
+                .orElseThrow(()->new NotFoundException("blog not found"));
+        BeanUtils.copyProperties(HTMLBlog, blog);
+        HTMLBlog.setContent(MarkdownUtils.markdownToHtml(blog.getContent()));
+        blogRepository.updateViews(id);
+        return HTMLBlog;
     }
 
     @Transactional

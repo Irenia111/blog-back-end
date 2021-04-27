@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface BlogService {
     Optional<Blog> getBlog(Long id);
+    Blog getHTMLContentBlog(Long id);
 
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
     Page<Blog> listBlog(Pageable pageable);
