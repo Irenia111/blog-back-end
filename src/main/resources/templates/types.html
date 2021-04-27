@@ -27,6 +27,7 @@
                                     <a th:each="type : ${types}"
                                        target="_blank"
                                        class="m-black item"
+                                       th:classappend="${type.id==activeTypeId} ? 'active'"
                                        th:if="${type.blogs.size() > 0}"
                                     >
                                         <span th:text="${type.name}"></span>
@@ -73,11 +74,18 @@
                         </div>
                         <!----- content ----->
                         <div class="ui segment attached">
-                            <div class="ui padded vertical segment m-padded-td-large  m-padded-rl">
-                                <div class="ui stackable mobile reversed middle aligned stackable grid">
+                            <div class="ui padded vertical segment m-padded-td-large  m-padded-rl"
+                                 th:each="blog : ${blogs.content}"
+                            >
+                                <div class="ui stackable mobile reversed middle aligned grid">
                                     <div class="eleven wide column">
-                                        <h3 class="ui header">文章标题</h3>
-                                        <p class="m-opacity-min m-text-thin">内容 Lorem ipsum dolor sit amet, consectetur
+                                        <h3 class="ui header">
+                                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                                               class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a>
+                                        </h3>
+                                        <p class="m-opacity-min m-text-thin"
+                                           th:text="|${blog.description}......|">内容 Lorem ipsum dolor sit amet,
+                                            consectetur
                                             adipisicing
                                             elit. A
                                             dicta doloremque eaque incidunt iste itaque laborum magni nulla veniam
@@ -87,70 +95,38 @@
                                                 <div class="ui horizontal link list">
                                                     <div class="item">
                                                         <img src="https://picsum.photos/id/0/100/100" alt=""
+                                                             th:src="@{${blog.user.avatar}}"
                                                              class="ui avatar image">
-                                                        <div class="content"><span>Irenia</span></div>
+                                                        <div class="content"><a href="#" class="header"
+                                                                                th:text="${blog.user.nickname}">Irenia</a>
+                                                        </div>
                                                     </div>
                                                     <div class="item">
-                                                        <span class="content"><i
-                                                                class="calendar icon"></i>2021-03-21</span>
+                                                        <i class="calendar icon"></i><span class="content"
+                                                                                           th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-03-21</span>
                                                     </div>
                                                     <div class="item">
-                                                        <span class="content"><i class="eye icon"></i>2</span>
+                                                        <i class="eye icon"></i><span class="content"
+                                                                                      th:text="${blog.views}">202</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="four wide column right aligned">
-                                                <a href="#" target="_blank" class="ui mini basic label pink">前端</a>
+                                                <a href="#" target="_blank" class="ui mini basic label pink"
+                                                   th:text="${blog.type.name}">认知升级</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="five wide column">
                                         <a href="" target="_blank">
                                             <img src="https://picsum.photos/id/103/800/450"
+                                                 th:src="@{${blog.firstPicture}}"
                                                  alt="" class="ui rounded image">
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui padded vertical segment m-padded-td-large  m-padded-rl">
-                                <div class="ui stackable mobile reversed middle aligned grid">
-                                    <div class="eleven wide column">
-                                        <h3 class="ui header">文章标题</h3>
-                                        <p class="m-opacity-min m-text-thin">内容 Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing
-                                            elit. A
-                                            dicta doloremque eaque incidunt iste itaque laborum magni nulla veniam
-                                            vero.</p>
-                                        <div class="ui middle aligned grid">
-                                            <div class="eleven wide column">
-                                                <div class="ui horizontal link list">
-                                                    <div class="item">
-                                                        <img src="https://picsum.photos/id/0/100/100" alt=""
-                                                             class="ui avatar image">
-                                                        <div class="content"><span>Irenia</span></div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <span class="content"><i
-                                                                class="calendar icon"></i>2021-03-21</span>
-                                                    </div>
-                                                    <div class="item">
-                                                        <span class="content"><i class="eye icon"></i>2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="four wide column right aligned">
-                                                <a href="#" target="_blank" class="ui mini basic label pink">前端</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="five wide column">
-                                        <a href="" target="_blank">
-                                            <img src="https://picsum.photos/id/109/800/450"
-                                                 alt="" class="ui rounded image">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <!----- bottom ----->
                         <div class="ui bottom segment attached">

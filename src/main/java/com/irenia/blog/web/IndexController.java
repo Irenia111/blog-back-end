@@ -55,17 +55,7 @@ public class IndexController {
         return "blog";
     }
 
-    @GetMapping("/tag")
-    public  String tag(Model model){
-        model.addAttribute("tags",
-               tagService.listTag());
-        return "tags";
-    }
 
-    @GetMapping("/type")
-    public  String type(Model model) {
-        model.addAttribute("types",
-                typeService.listType());
-        return "types";
-    }
+
+
 }
