@@ -131,16 +131,19 @@
                             <div class="ui middle aligned two column grid">
                                 <div class="column">
                                     <a class="ui mini pink basic button"
-                                       th:href="@{/(page=${blogs.number} - 1)}">上一页</a>
+                                       th:href="@{/(page=${blogs.number} - 1)}"
+                                       th:unless="${blogs.first}"
+                                    >上一页</a>
                                 </div>
                                 <div class="column right aligned">
                                     <a class="ui mini pink basic button"
-                                       th:href="@{/(page=${blogs.number} + 1)}">下一页</a>
+                                       th:href="@{/(page=${blogs.number} + 1)}"
+                                       th:unless="${blogs.last}">下一页</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="five wide column">
+                    <div class=" five wide column">
                         <!----- 分类 ----->
                         <div class="ui segments" th:if="${types.size() > 0}">
                             <div class="ui secondary segment">
@@ -201,24 +204,29 @@
                                    class="ui tag label basic pink left pointing m-margin-td"
                                 >
                                     <span th:text="${tag.name}">前端</span>
-                                    <div class="detail" th:if="${tag.blogs.size() > 0}" th:text="${tag.blogs.size()}">
+                                    <div class="detail" th:if="${tag.blogs.size() > 0}"
+                                         th:text="${tag.blogs.size()}">
                                         13
                                     </div>
                                 </a>
                                 <!--/*-->
-                                <a target="_blank" class="ui tag label basic pink left pointing m-margin-td">
+                                <a target="_blank"
+                                   class="ui tag label basic pink left pointing m-margin-td">
                                     网sss络
                                     <div class="detail">23</div>
                                 </a>
-                                <a target="_blank" class="ui tag label basic pink left pointing m-margin-td">
+                                <a target="_blank"
+                                   class="ui tag label basic pink left pointing m-margin-td">
                                     网络
                                     <div class="detail">23</div>
                                 </a>
-                                <a target="_blank" class="ui tag label basic pink left pointing m-margin-td">
+                                <a target="_blank"
+                                   class="ui tag label basic pink left pointing m-margin-td">
                                     学习笔记
                                     <div class="detail">23</div>
                                 </a>
-                                <a target="_blank" class="ui tag label basic pink left pointing m-margin-td">
+                                <a target="_blank"
+                                   class="ui tag label basic pink left pointing m-margin-td">
                                     学习笔记
                                     <div class="detail">23</div>
                                 </a>
@@ -233,7 +241,8 @@
                             <div class="ui pink segment">
                                 <div class="ui fluid vertical menu">
                                     <a th:each="blog : ${recommendBlogs}" href="#"
-                                       th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black item"
+                                       th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                                       class="m-black item"
                                        th:text="${blog.title}">你真的理解什么是财富自由吗?</a>
                                 </div>
                             </div>

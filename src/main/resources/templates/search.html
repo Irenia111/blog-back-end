@@ -86,12 +86,12 @@
                 <div class="ui bottom segment attached" th:if="${queryBlogs.totalPages} > 1">
                     <div class="ui middle aligned two column grid">
                         <div class="column">
-                            <a class="ui mini pink basic button"
-                               th:href="@{/(page=${queryBlogs.number} - 1)}" th:unless="${queryBlogs.first}" >上一页</a>
+                            <!--Todo 这里如果要实现分页，要参考adminblog搜索的分页，不用ajax的话，没有query-->
+                            <!--Todo query也可以通过path传入-->
+                            <a class="ui mini pink basic button">上一页</a>
                         </div>
                         <div class="column right aligned">
-                            <a class="ui mini pink basic button"
-                               th:href="@{/(page=${queryBlogs.number} + 1)}" th:unless="${queryBlogs.first}" >下一页</a>
+                            <a class="ui mini pink basic button">下一页</a>
                         </div>
                     </div>
                 </div>
