@@ -26,7 +26,7 @@
                     <div class="required field">
                         <div class="ui left labeled input">
                             <div class="ui section dropdown teal basic label">
-                                <input type="hidden" name="flag.id" th:value="*{flag} != null ? *{flag.id}">
+                                <input type="hidden" name="flag.id" th:value="*{flag} != null ? *{flag.id} : 1">
                                 <div class="text" th:text="*{flag} != null ? *{flag.name} : '原创'"></div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
