@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title th:replace="${title}">Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
 </head>
 <!--导航-->
 <div th:fragment="slider(n)" class="ui sidebar inverted vertical menu uncover animating">
@@ -33,10 +33,10 @@
     <a class="ui item m-mobile-hide" th:href="@{/}" th:classappend="${n == 1} ? 'm-pink'">
         <i class="book icon"></i>首页
     </a>
-    <a class="ui item m-mobile-hide" th:href="@{/tag/-1}" th:classappend="${n == 2} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/type/-1}" th:classappend="${n == 2} ? 'm-pink'">
         <i class="folder open icon"></i>分类
     </a>
-    <a class="ui item m-mobile-hide" th:href="@{/type/-1}" th:classappend="${n == 3} ? 'm-pink'">
+    <a class="ui item m-mobile-hide" th:href="@{/tag/-1}" th:classappend="${n == 3} ? 'm-pink'">
         <i class="tags icon"></i>标签
     </a>
     <a class="ui item m-mobile-hide" th:href="@{/archieve}" th:classappend="${n == 4} ? 'm-pink'">

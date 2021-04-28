@@ -56,12 +56,12 @@ const qrcode = new QRCode("qrcode", {
 function adjustBlogColumn() {
   if ($(window).width() > 768) {
     $('.ui.sticky').sticky('refresh');
-    $('#blog').removeClass('fourteen wide column').addClass('eleven wide column')
-    $('#blog-content').addClass('attached bottom').removeAttr('style')
+    $('#blog').removeClass('fifteen wide column').addClass('eleven wide column')
+    $('#blog-title').removeClass('ui top attached segment').addClass('ui attached segment')
   } else {
     $('.ui.sticky.mobile').sticky('refresh');
-    $('#blog').removeClass('eleven wide column').addClass('fourteen wide column')
-    $('#blog-content').removeClass('attached bottom').css("margin", "0")
+    $('#blog').removeClass('eleven wide column').addClass('fifteen wide column')
+    $('#blog-title').removeClass('ui attached segment').addClass('ui top attached segment')
 
     tocbot_mobile = Object.assign(tocbot)
     tocbot_mobile.init({

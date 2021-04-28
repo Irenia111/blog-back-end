@@ -67,12 +67,14 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog getHTMLContentBlog(Long id) {
-        Blog HTMLBlog = new Blog();
         Blog blog = blogRepository
                 .findById(id)
                 .orElseThrow(()->new NotFoundException("blog not found"));
-        BeanUtils.copyProperties(HTMLBlog, blog);
-        HTMLBlog.setContent(MarkdownUtils.markdownToHtml(blog.getContent()));
+        Blog HTMLBlog = new Blog();
+        BeanUtils.copyProperties(blog,HTMLBlog);
+        String content = HTMLBlog.getContent();
+        HTMLBlog.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+
         blogRepository.updateViews(id);
         return HTMLBlog;
     }

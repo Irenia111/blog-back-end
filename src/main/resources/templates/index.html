@@ -200,11 +200,13 @@
                             </div>
                             <div class="ui pink segment">
                                 <a th:each="tag : ${tags}"
+                                   th:if="${tag.blogs.size() > 0}"
                                    target="_blank"
                                    class="ui tag label basic pink left pointing m-margin-td"
                                 >
                                     <span th:text="${tag.name}">前端</span>
-                                    <div class="detail" th:if="${tag.blogs.size() > 0}"
+                                    <div class="detail"
+                                         th:if="${tag.blogs.size() > 0}"
                                          th:text="${tag.blogs.size()}">
                                         13
                                     </div>
@@ -259,12 +261,12 @@
             </div>
         </div>
     </div>
+    <!--页脚-->
     <footer th:replace="_fragments :: footer_mobile"
             class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
     <footer th:replace="_fragments :: footer_pc"
             class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
 </main>
-<!--页脚-->
 <script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 <script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js"></script>

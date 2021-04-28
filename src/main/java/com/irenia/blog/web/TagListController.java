@@ -1,5 +1,6 @@
 package com.irenia.blog.web;
 
+import com.irenia.blog.NotFoundException;
 import com.irenia.blog.prototype.Tag;
 import com.irenia.blog.service.BlogService;
 import com.irenia.blog.service.TagService;
@@ -35,7 +36,10 @@ public class TagListController {
         model.addAttribute("tags", tags);
         model.addAttribute("blogs",
                 blogService.listBlog(id, pageable));
-        model.addAttribute("activeTypeId", id);
+        Tag tag = tagService.getTag(id).orElseThrow(() -> new NotFoundException("tag not found"));
+        model.addAttribute("activeTagId", tag.getId());
+        model.addAttribute("activeTagName", tag.getName());
+        model.addAttribute("activeTagBlogsSize", tag.getBlogs().size());
         return "tags";
     }
 }

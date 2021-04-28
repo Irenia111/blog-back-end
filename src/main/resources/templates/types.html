@@ -20,15 +20,14 @@
                     <div class="five wide column center aligned">
                         <div class="ui segments">
                             <div class="ui secondary segment">
-                                <h4><i class="idea icon"></i>分类</h4>
+                                <h3><i class="idea icon"></i>分类</h3>
                             </div>
                             <div class="ui pink segment">
                                 <div class="ui fluid vertical menu">
                                     <a th:each="type : ${types}"
                                        th:href="@{/type/{id}(id=${type.id})}"
-                                       target="_blank"
                                        class="m-black item"
-                                       th:classappend="${type.id==activeTypeId} ? 'active'"
+                                       th:classappend="${type.id == activeTypeId} ? 'm-pink'"
                                        th:if="${type.blogs.size() > 0}"
                                     >
                                         <span th:text="${type.name}"></span>
@@ -66,10 +65,12 @@
                         <div class="ui top attached segment">
                             <div class="ui middle aligned two column grid">
                                 <div class="column">
-                                    <h3 class="ui pink header">博客</h3>
+                                    <h3 class="ui pink header" th:text="${activeTypeName}">博客</h3>
                                 </div>
                                 <div class="column right aligned">
-                                    共 <h3 class="ui orange header m-inline-block m-text-thin">14</h3> 篇
+                                    共 <h3 class="ui orange header m-inline-block m-text-thin"
+                                          th:text="${activeTypeBlogsSize}"
+                                >14</h3> 篇
                                 </div>
                             </div>
                         </div>
@@ -130,7 +131,7 @@
 
                         </div>
                         <!----- bottom ----->
-                        <div class="ui bottom segment attached">
+                        <div class="ui bottom attached segment">
                             <div class="ui middle aligned two column grid">
                                 <div class="column">
                                     <a class="ui mini pink basic button">上一页</a>
@@ -146,12 +147,15 @@
         </div>
         <!--页脚-->
         <footer th:replace="_fragments :: footer_mobile"
-                class="ui inverted vertical footer segment m-padded-td-max m-mobile-show"></footer>
+                class="ui inverted vertical footer segment m-padded-td-max m-mobile-show">
+        </footer>
         <footer th:replace="_fragments :: footer_pc"
-                class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide"></footer>
+                class="ui inverted vertical footer segment m-padded-td-max m-mobile-hide">
+        </footer>
+    </div>
 </main>
-<script type="text/javascript" th:src="@{lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.min.js}" src="../static/lib/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-<script type="text/javascript" th:src="@{js/index.js}" src="../static/js/index.js"></script>
+<script type="text/javascript" th:src="@{/js/index.js}" src="../static/js/index.js"></script>
 </body>
 </html>

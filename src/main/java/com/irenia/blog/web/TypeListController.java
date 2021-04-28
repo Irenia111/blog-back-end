@@ -1,5 +1,6 @@
 package com.irenia.blog.web;
 
+import com.irenia.blog.NotFoundException;
 import com.irenia.blog.prototype.Type;
 import com.irenia.blog.service.BlogService;
 import com.irenia.blog.service.TypeService;
@@ -39,7 +40,10 @@ public class TypeListController {
         blogQuery.setTypeId(id);
         model.addAttribute("blogs",
                 blogService.listBlog(pageable, blogQuery));
-        model.addAttribute("activeTypeId", id);
+        Type type = typeService.getType(id).orElseThrow(() -> new NotFoundException("type not found"));
+        model.addAttribute("activeTypeId", type.getId());
+        model.addAttribute("activeTypeName", type.getName());
+        model.addAttribute("activeTypeBlogsSize", type.getBlogs().size());
         return "types";
     }
 }
