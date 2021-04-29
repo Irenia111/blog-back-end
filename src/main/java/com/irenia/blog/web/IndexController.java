@@ -4,6 +4,7 @@ package com.irenia.blog.web;
 // import com.irenia.blog.NotFoundException;
 import com.irenia.blog.NotFoundException;
 import com.irenia.blog.service.BlogService;
+import com.irenia.blog.service.CommentService;
 import com.irenia.blog.service.TagService;
 import com.irenia.blog.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class IndexController {
     private TypeService typeService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/")
     public String index(@PageableDefault(size = 6, sort = {"updateTime"},
@@ -52,6 +55,8 @@ public class IndexController {
                             Model model) {
         model.addAttribute("blog",
                 blogService.getHTMLContentBlog(id));
+        model.addAttribute("comments",
+                commentService.listCommentByBlogId(id));
         return "blog";
     }
 
