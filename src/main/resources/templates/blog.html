@@ -140,10 +140,17 @@
                                                     <p>This has been very useful for my research. Thanks as well!</p>
                                                 </div>
                                                 <div class="actions">
-                                                    <a class="reply  reply-btn">回复</a>
-                                                    <a class="reply-close-btn">关闭回复</a>
+                                                    <a class="reply reply-btn"
+                                                       th:attr="data-commentid=${comment.id}"
+                                                    >回复</a>
+                                                    <a class="reply-close-btn"
+                                                       th:attr="data-commentid=${comment.id}"
+                                                       th:classappend="${comment.id}"
+                                                       style="display: none">关闭回复</a>
                                                 </div>
-                                                <form name="reply-form" class="ui reply form" style="display: none">
+                                                <form class="ui reply form reply-form"
+                                                      th:classappend="${comment.id}"
+                                                      style="display: none">
                                                     <input hidden name="blogId" th:value="${blog.id}">
                                                     <input hidden name="commentParentId" th:value="${comment.id}">
                                                     <div class="field">
@@ -154,9 +161,7 @@
                                                         <div class="four wide field">
                                                             <div class="ui left icon small input">
                                                                 <i class="user icon"></i>
-                                                                <input type="text" name="nickname"
-                                                                       th:value="${comment.nickname}"
-                                                                >
+                                                                <input type="text" name="nickname">
                                                             </div>
                                                         </div>
                                                         <div class="seven wide field">
@@ -165,14 +170,13 @@
                                                                 <input type="text" name="email" placeholder="邮箱">
                                                             </div>
                                                         </div>
-                                                        <div class="field">
-                                                            <button class="ui small button icon pink"
-                                                                    style="width: 100%">
-                                                                <i class="send icon"></i>
-                                                                回复
-                                                            </button>
+                                                        <div class="ui small submit button pink comment-btn"
+                                                             data-formselector="comment-form"
+                                                        >
+                                                            回复
                                                         </div>
                                                     </div>
+                                                    <div class="ui error message"></div>
                                                 </form>
                                             </div>
                                             <div class="comments" th:if="${comment.replyComments.size() > 0}">
@@ -197,12 +201,16 @@
                                                             Elliot you are always so right :)
                                                         </div>
                                                         <div class="actions">
-                                                            <a class="reply"
-                                                               th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
-                                                               onclick="reply(this)"
-                                                            >Reply</a>
+                                                            <a class="reply reply-btn"
+                                                               th:attr="data-reply=|reply-${reply.id}|,data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                                               th:text="|回复 ${reply.parentComment.nickname}|"
+                                                            ></a>
+                                                            <a class="reply-close-btn"
+                                                               th:classappend="|reply-${reply.id}|"
+                                                               style="display: none">关闭回复</a>
                                                         </div>
-                                                        <form id="sub-reply-form" class="ui reply form"
+                                                        <form class="ui reply form"
+                                                              th:classappend="|sub-reply-form-${reply.id}|"
                                                               style="display: none">
                                                             <input hidden name="blogId" th:value="${blog.id}">
                                                             <input hidden name="commentParentId" th:value="${reply.id}">
@@ -225,14 +233,12 @@
                                                                                placeholder="邮箱">
                                                                     </div>
                                                                 </div>
-                                                                <div class="field">
-                                                                    <button class="ui small button icon pink"
-                                                                            style="width: 100%">
-                                                                        <i class="send icon"></i>
-                                                                        回复
-                                                                    </button>
-                                                                </div>
+                                                                <button class="ui small submit button pink comment-btn"
+                                                                        style="width: 100%">
+                                                                    回复
+                                                                </button>
                                                             </div>
+                                                            <div class="ui error message"></div>
                                                         </form>
                                                     </div>
                                                 </div>
