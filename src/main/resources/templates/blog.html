@@ -187,11 +187,6 @@
                                                     </a>
                                                     <div class="content">
                                                         <a class="author" th:text="${reply.nickname}">Jenny Hess</a>
-                                                        <!--
-                                                        <div class="ui mini basic pink left pointing label m-padded-mini"
-                                                             th:if="${reply.adminComment}">博主
-                                                        </div>
-                                                        -->
                                                         &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|"
                                                                     class="m-pink">@ 小白</span>
                                                         <div class="metadata">
@@ -204,18 +199,19 @@
                                                         </div>
                                                         <div class="actions">
                                                             <a class="reply reply-btn"
-                                                               th:attr="data-reply=|reply-${reply.id}|,data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                                               th:attr="data-formselector=|sub-reply-form${reply.id}|"
                                                                th:text="|回复 ${reply.parentComment.nickname}|"
                                                             ></a>
                                                             <a class="reply-close-btn"
-                                                               th:classappend="|reply-${reply.id}|"
+                                                               th:attr="data-formselector=|sub-reply-form${reply.id}|"
+                                                               th:classappend="|sub-reply-form${reply.id}|"
                                                                style="display: none">关闭回复</a>
                                                         </div>
-                                                        <form class="ui reply form"
-                                                              th:classappend="|sub-reply-form-${reply.id}|"
+                                                        <form class="ui reply form reply-form"
+                                                              th:classappend="|sub-reply-form${reply.id}|"
                                                               style="display: none">
-                                                            <input hidden name="blogId" th:value="${blog.id}">
-                                                            <input hidden name="commentParentId" th:value="${reply.id}">
+                                                            <input hidden name="blog.id" th:value="${reply.blog.id}">
+                                                            <input hidden name="parentComment.id" th:value="${reply.id}">
                                                             <div class="field">
                                                             <textarea style="height: 4px" class="small" name="content"
                                                                       placeholder="说点什么吧"></textarea>
@@ -236,7 +232,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <button class="ui small submit button pink comment-btn"
-                                                                        style="width: 100%">
+                                                                        th:attr="data-formselector=|sub-reply-form${reply.id}|">
                                                                     回复
                                                                 </button>
                                                             </div>

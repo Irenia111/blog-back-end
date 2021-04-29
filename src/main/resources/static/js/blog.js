@@ -82,6 +82,7 @@ $('.reply-btn').click(function (e) {
     //拿到data-*
     const formSelector = e.target.dataset.formselector;
     $('.reply-close-btn.'+formSelector).show()
+    console.log($('.reply-close-btn.'+formSelector))
     $('.reply-form.'+formSelector).show()
 })
 //关闭回复按钮
