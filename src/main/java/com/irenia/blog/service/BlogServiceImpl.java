@@ -47,7 +47,6 @@ public class BlogServiceImpl implements BlogService {
     @Modifying
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        System.out.println(blog.getFlag());
         Blog oldBlog = blogRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("blog not found"));
         //这里会存在更新无法保存的状况，因为源对象有null值，在使用BeanUtils来copy时null值会覆盖目标对象的同名字段属性值

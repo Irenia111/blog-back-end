@@ -24,14 +24,13 @@ public class CommentController {
 
     @GetMapping("/blog/comments/{blogId}")
     public String comments(@PathVariable Long blogId, Model model) {
+        System.out.println("sssss");
         model.addAttribute("comments", commentService.listCommentByBlogId(blogId));
         return "blog :: commentList";
     }
 
     @PostMapping("/blog/comments")
     public String post(Comment comment) {
-        System.out.println(comment);
-        System.out.println(comment.getBlog().getId());
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId)
                 .orElseThrow(() -> new NotFoundException("blog not found")));

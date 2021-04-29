@@ -81,16 +81,16 @@ function adjustBlogColumn() {
 $('.reply-btn').click(function (e) {
     //拿到data-*
     const formSelector = e.target.dataset.formselector;
-    $('.reply-close-btn.'+formSelector).show()
-    console.log($('.reply-close-btn.'+formSelector))
-    $('.reply-form.'+formSelector).show()
+    $('.reply-close-btn.' + formSelector).show()
+    console.log($('.reply-close-btn.' + formSelector))
+    $('.reply-form.' + formSelector).show()
 })
 //关闭回复按钮
 $('.reply-close-btn').click(function (e) {
         //拿到data-*
         const formSelector = e.target.dataset.formselector;
-        $('.reply-close-btn.'+formSelector).hide()
-        $('.reply-form.'+formSelector).hide()
+        $('.reply-close-btn.' + formSelector).hide()
+        $('.reply-form.' + formSelector).hide()
     }
 )
 
@@ -100,6 +100,7 @@ $('.comment-btn').click(function (e) {
     const formSelector = e.target.dataset.formselector;
     validAndSubmitForm('.ui.form' + '.' + formSelector);
 })
+
 //提交评论
 function validAndSubmitForm(selector) {
     $(selector).form({
@@ -136,12 +137,13 @@ function validAndSubmitForm(selector) {
                 ]
             }
         },
-        onSuccess: function(event, fields) {
+        onSuccess: function (event, fields) {
             // [*] 表单验证通过后调用 onSuccess 函数
             // fields 中保存了所有的表单数据，例如 {name: "Alice", color: "rgb(255, 255, 255)"}
             event.preventDefault(); // [*] 如果需要使用 Ajax 提交时，防止表单自动提交
             console.log(fields);
-            $(selector).load("comments",{
+            //因为load方法确定了数据返回后渲染的位置，所以这里不选择表单，而是选择渲染位置
+            $('#comment-list').load("comments",{
                 "parentComment.id" : fields['parentComment.id'],
                 "blog.id" : fields['blog.id'],
                 "nickname": fields.nickname,
@@ -151,10 +153,11 @@ function validAndSubmitForm(selector) {
                 clearContent();
             });
         }
-    });
-};
+    })
+}
+
 
 function clearContent() {
     $("[name='content']").val('').attr("placeholder", "说点什么吧... ...");
     $("[name='parentComment.id']").val(-1);
-};
+}

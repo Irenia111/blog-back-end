@@ -123,7 +123,7 @@
                                 </form>
                             </div>
                             <div class="ui segment">
-                                <div th:fragment="commentList">
+                                <div th:fragment="commentList" id="comment-list">
                                     <div class="ui comments">
                                         <div class="comment" th:each="comment : ${comments}">
                                             <a class="avatar">
@@ -186,9 +186,10 @@
                                                              src="https://avatars.dicebear.com/api/gridy/jenny.svg">
                                                     </a>
                                                     <div class="content">
-                                                        <a class="author" th:text="${reply.nickname}">Jenny Hess</a>
+                                                        <a class="author" th:text="${reply.nickname}">Jenny Hess
                                                         &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|"
                                                                     class="m-pink">@ 小白</span>
+                                                        </a>
                                                         <div class="metadata">
                                                         <span class="date"
                                                               th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">
@@ -200,7 +201,7 @@
                                                         <div class="actions">
                                                             <a class="reply reply-btn"
                                                                th:attr="data-formselector=|sub-reply-form${reply.id}|"
-                                                               th:text="|回复 ${reply.parentComment.nickname}|"
+                                                               th:text="|回复 ${reply.nickname}|"
                                                             ></a>
                                                             <a class="reply-close-btn"
                                                                th:attr="data-formselector=|sub-reply-form${reply.id}|"
