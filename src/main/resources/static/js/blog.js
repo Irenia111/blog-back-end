@@ -77,6 +77,28 @@ function adjustBlogColumn() {
 }
 
 
+//回复按钮
+$('.reply-btn').click(function (e) {
+    //拿到data-*
+    const commentId = e.target.dataset.commentid;
+    $('.reply-close-btn.'+commentId).show()
+    $('.reply-form.'+commentId).show()
+})
+//关闭回复按钮
+$('.reply-close-btn').click(function (e) {
+        //拿到data-*
+        const commentId = e.target.dataset.commentid;
+        $('.reply-close-btn.'+commentId).hide()
+        $('.reply-form.'+commentId).hide()
+    }
+)
+
+//提交评论
+$('.comment-btn').click(function (e) {
+    //拿到data-*
+    const formSelector = e.target.dataset.formselector;
+    validAndSubmitForm('.ui.form' + '.' + formSelector);
+})
 //提交评论
 function validAndSubmitForm(selector) {
     $(selector).form({
@@ -132,27 +154,6 @@ function validAndSubmitForm(selector) {
 };
 
 function clearContent() {
-    $("[name='content']").val('');
+    $("[name='content']").val('').attr("placeholder", "说点什么吧... ...");
     $("[name='parentComment.id']").val(-1);
-    $("[name='content']").attr("placeholder", "说点什么吧... ...");
 };
-
-$('.comment-btn').click(function (e) {
-    //拿到data-*
-    const formSelector = e.target.dataset.formselector;
-    validAndSubmitForm('.ui.form' + '.' + formSelector);
-})
-
-$('.reply-btn').click(function (e) {
-    //拿到data-*
-    const commentId = e.target.dataset.commentid;
-    $('.reply-close-btn.'+commentId).show()
-    $('.reply-form.'+commentId).show()
-})
-$('.reply-close-btn').click(function (e) {
-        //拿到data-*
-        const commentId = e.target.dataset.commentid;
-        $('.reply-close-btn.'+commentId).hide()
-        $('.reply-form.'+commentId).hide()
-    }
-)
