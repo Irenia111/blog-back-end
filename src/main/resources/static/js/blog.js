@@ -75,27 +75,33 @@ function adjustBlogColumn() {
         });
     }
 }
-
-
-//回复按钮
-$('.reply-btn').click(function (e) {
+//回复按钮-----Thymeleaf模板引擎下 使用局部刷新后 jQuery事件绑定失效的问题
+//所以这种绑定需要更换
+// $('.reply-btn').click(function (e) {
+//     //拿到data-*
+//     const formSelector = e.target.dataset.formselector;
+//     $('.reply-close-btn.' + formSelector).show()
+//     console.log($('.reply-close-btn.' + formSelector))
+//     $('.reply-form.' + formSelector).show()
+// })
+$(document).on('click','.reply-btn',function (e) {
     //拿到data-*
     const formSelector = e.target.dataset.formselector;
     $('.reply-close-btn.' + formSelector).show()
-    console.log($('.reply-close-btn.' + formSelector))
+    // console.log($('.reply-close-btn.' + formSelector))
     $('.reply-form.' + formSelector).show()
 })
 //关闭回复按钮
-$('.reply-close-btn').click(function (e) {
-        //拿到data-*
-        const formSelector = e.target.dataset.formselector;
-        $('.reply-close-btn.' + formSelector).hide()
-        $('.reply-form.' + formSelector).hide()
-    }
-)
+$(document).on('click','.reply-close-btn',function (e) {
+    //拿到data-*
+    const formSelector = e.target.dataset.formselector;
+    $('.reply-close-btn.' + formSelector).hide()
+    $('.reply-form.' + formSelector).hide()
+})
+
 
 //提交评论
-$('.comment-btn').click(function (e) {
+$(document).on('click','.comment-btn',function (e) {
     //拿到data-*
     const formSelector = e.target.dataset.formselector;
     validAndSubmitForm('.ui.form' + '.' + formSelector);
@@ -138,12 +144,14 @@ function validAndSubmitForm(selector) {
             }
         },
         onSuccess: function (event, fields) {
+            //这里为啥调用了两遍？？？
+            console.log("aaaa")
             // [*] 表单验证通过后调用 onSuccess 函数
             // fields 中保存了所有的表单数据，例如 {name: "Alice", color: "rgb(255, 255, 255)"}
             event.preventDefault(); // [*] 如果需要使用 Ajax 提交时，防止表单自动提交
             console.log(fields);
             //因为load方法确定了数据返回后渲染的位置，所以这里不选择表单，而是选择渲染位置
-            $('#comment-list').load("comments",{
+            $('#comment-list').load("/comments",{
                 "parentComment.id" : fields['parentComment.id'],
                 "blog.id" : fields['blog.id'],
                 "nickname": fields.nickname,
@@ -159,5 +167,6 @@ function validAndSubmitForm(selector) {
 
 function clearContent() {
     $("[name='content']").val('').attr("placeholder", "说点什么吧... ...");
-    $("[name='parentComment.id']").val(-1);
+    $("[name='nickname']").val('');
+    $("[name='email']").val('');
 }

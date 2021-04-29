@@ -111,19 +111,20 @@
                                                 <input type="text" name="email" placeholder="邮箱">
                                             </div>
                                         </div>
-                                        <div class="ui submit button icon pink comment-btn"
-                                             data-formselector="comment-form"
+                                        <button type="button"
+                                                class="ui submit button icon pink comment-btn"
+                                                data-formselector="comment-form"
                                         >
                                             <i class="send icon"></i>
                                             发布
-                                        </div>
+                                        </button>
 
                                     </div>
                                     <div class="ui error message"></div>
                                 </form>
                             </div>
-                            <div class="ui segment">
-                                <div th:fragment="commentList" id="comment-list">
+                            <div id="comment-list" class="ui segment">
+                                <div th:fragment="commentList">
                                     <div class="ui comments">
                                         <div class="comment" th:each="comment : ${comments}">
                                             <a class="avatar">
@@ -170,11 +171,11 @@
                                                                 <input type="text" name="email" placeholder="邮箱">
                                                             </div>
                                                         </div>
-                                                        <div class="ui small submit button pink comment-btn"
+                                                        <button type="button" class="ui small submit button pink comment-btn"
                                                              th:attr="data-formselector=|reply-form${comment.id}|"
                                                         >
                                                             回复
-                                                        </div>
+                                                        </button>
                                                     </div>
                                                     <div class="ui error message"></div>
                                                 </form>
@@ -187,8 +188,8 @@
                                                     </a>
                                                     <div class="content">
                                                         <a class="author" th:text="${reply.nickname}">Jenny Hess
-                                                        &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|"
-                                                                    class="m-pink">@ 小白</span>
+                                                            &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|"
+                                                                        class="m-pink">@ 小白</span>
                                                         </a>
                                                         <div class="metadata">
                                                         <span class="date"
@@ -212,7 +213,8 @@
                                                               th:classappend="|sub-reply-form${reply.id}|"
                                                               style="display: none">
                                                             <input hidden name="blog.id" th:value="${reply.blog.id}">
-                                                            <input hidden name="parentComment.id" th:value="${reply.id}">
+                                                            <input hidden name="parentComment.id"
+                                                                   th:value="${reply.id}">
                                                             <div class="field">
                                                             <textarea style="height: 4px" class="small" name="content"
                                                                       placeholder="说点什么吧"></textarea>
@@ -232,7 +234,7 @@
                                                                                placeholder="邮箱">
                                                                     </div>
                                                                 </div>
-                                                                <button class="ui small submit button pink comment-btn"
+                                                                <button type="button" class="ui small submit button pink comment-btn"
                                                                         th:attr="data-formselector=|sub-reply-form${reply.id}|">
                                                                     回复
                                                                 </button>

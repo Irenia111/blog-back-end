@@ -22,20 +22,21 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/blog/comments/{blogId}")
+    @GetMapping("/comments/{blogId}")
     public String comments(@PathVariable Long blogId, Model model) {
-        System.out.println("sssss");
+        System.out.println("aaaaa");
         model.addAttribute("comments", commentService.listCommentByBlogId(blogId));
         return "blog :: commentList";
     }
 
-    @PostMapping("/blog/comments")
+    @PostMapping("/comments")
     public String post(Comment comment) {
+        System.out.println("ssss");
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId)
                 .orElseThrow(() -> new NotFoundException("blog not found")));
        commentService.saveComment(comment);
-        return "redirect:/blog/comments/" + blogId;
+        return "redirect:/comments/" + blogId;
     }
 
 }

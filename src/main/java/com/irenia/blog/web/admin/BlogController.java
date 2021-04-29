@@ -54,7 +54,6 @@ public class BlogController {
             direction = Sort.Direction.DESC)
                                  Pageable pageable,
                          BlogQuery blog, Model model) {
-        System.out.println(blog.getTypeId());
         model.addAttribute("published", blogService.listBlog(pageable, blog));
         return "admin/admin-blog::blogList";//返回的是一个fragment
     }
