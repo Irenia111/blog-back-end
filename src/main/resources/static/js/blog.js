@@ -80,16 +80,16 @@ function adjustBlogColumn() {
 //回复按钮
 $('.reply-btn').click(function (e) {
     //拿到data-*
-    const commentId = e.target.dataset.commentid;
-    $('.reply-close-btn.'+commentId).show()
-    $('.reply-form.'+commentId).show()
+    const formSelector = e.target.dataset.formselector;
+    $('.reply-close-btn.'+formSelector).show()
+    $('.reply-form.'+formSelector).show()
 })
 //关闭回复按钮
 $('.reply-close-btn').click(function (e) {
         //拿到data-*
-        const commentId = e.target.dataset.commentid;
-        $('.reply-close-btn.'+commentId).hide()
-        $('.reply-form.'+commentId).hide()
+        const formSelector = e.target.dataset.formselector;
+        $('.reply-close-btn.'+formSelector).hide()
+        $('.reply-form.'+formSelector).hide()
     }
 )
 
@@ -139,7 +139,7 @@ function validAndSubmitForm(selector) {
             // [*] 表单验证通过后调用 onSuccess 函数
             // fields 中保存了所有的表单数据，例如 {name: "Alice", color: "rgb(255, 255, 255)"}
             event.preventDefault(); // [*] 如果需要使用 Ajax 提交时，防止表单自动提交
-            // console.log(fields);
+            console.log(fields);
             $(selector).load("comments",{
                 "parentComment.id" : fields['parentComment.id'],
                 "blog.id" : fields['blog.id'],
